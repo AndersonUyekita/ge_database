@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lições Aprendidas on GE Database</title>
-    <link>/li%C3%A7%C3%B5es-aprendidas/</link>
+    <link>https://andersonuyekita.github.io/ge_database/li%C3%A7%C3%B5es-aprendidas/</link>
     <description>Recent content in Lições Aprendidas on GE Database</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Fri, 04 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/li%C3%A7%C3%B5es-aprendidas/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://andersonuyekita.github.io/ge_database/li%C3%A7%C3%B5es-aprendidas/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Panel Shortcode</title>
-      <link>/li%C3%A7%C3%B5es-aprendidas/panel-shortcode/</link>
+      <link>https://andersonuyekita.github.io/ge_database/li%C3%A7%C3%B5es-aprendidas/panel-shortcode/</link>
       <pubDate>Fri, 04 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>/li%C3%A7%C3%B5es-aprendidas/panel-shortcode/</guid>
+      <guid>https://andersonuyekita.github.io/ge_database/li%C3%A7%C3%B5es-aprendidas/panel-shortcode/</guid>
       <description>Panel ShortcodeAtenção  Ao optar por usar o modelo Rmd, os Shortcodes oferecidos pelo tema deixam de funcionar.    Deste modo, uma forma de contornar esse problema foi usando um chunk de código em r:
 “sprintf(”{{&amp;lt; panel title=“Título do Panel” style=“style” &amp;gt;}} %s {{&amp;lt; /panel &amp;gt;}}“,”[content]“)”
 </description>
@@ -20,10 +20,10 @@
     
     <item>
       <title>Markdown Headers</title>
-      <link>/li%C3%A7%C3%B5es-aprendidas/markdown-headers/</link>
+      <link>https://andersonuyekita.github.io/ge_database/li%C3%A7%C3%B5es-aprendidas/markdown-headers/</link>
       <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>/li%C3%A7%C3%B5es-aprendidas/markdown-headers/</guid>
+      <guid>https://andersonuyekita.github.io/ge_database/li%C3%A7%C3%B5es-aprendidas/markdown-headers/</guid>
       <description>Atenção## [1] &amp;quot;{{&amp;lt; panel title=\&amp;quot;TITLE\&amp;quot; style=\&amp;quot;warning\&amp;quot; &amp;gt;}} &amp;lt;p&amp;gt;HELLO&amp;lt;/p&amp;gt; {{&amp;lt; /panel &amp;gt;}}&amp;quot;ATENÇÃOAo optar por usar o modelo Rmd os Headers do Markdown funcionam, contudo eles deixam de possuim o id. Deste modo será necessário inserir manualmente os id caso seja necessário a utilização de referência cruzada dentro do arquivo HTML.</description>
     </item>
     
