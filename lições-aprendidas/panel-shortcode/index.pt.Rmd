@@ -1,0 +1,25 @@
+---
+title: Panel Shortcode
+author: Traveler
+date: '2021-06-04'
+slug: []
+categories: []
+tags: []
+---
+
+# Panel Shortcode
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(shiny)
+
+var <- 'Ao optar por usar o modelo <code>Rmd</code>, os <code>Shortcodes</code> oferecidos pelo tema deixam de funcionar.'
+
+HTML(sprintf('{{< panel title="Atenção" style="warning" >}} %s {{< /panel >}}', var))
+```
+
+Deste modo, uma forma de contornar esse problema foi usando um chunk de código em r:
+
+<code>
+"sprintf("{{< panel title="Título do Panel" style="style" >}} %s {{< /panel >}}", "[content]")"
+</code>
+
