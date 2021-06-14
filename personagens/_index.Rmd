@@ -12,11 +12,9 @@ library(tidyverse)
 
 # Definindo o path das imagens.
 #path <- "/"
-path <- "https://andersonuyekita.github.io/ge_database/"
+path <- "https://andersonuyekita.github.io/ge_database"
 
 tags$base(href=path)
-
-
 
 # Os endereços foram obtidos a partir do list.files() 
 base::source(file = "../../R/personagens_back_end.R", encoding = "UTF-8")
@@ -170,5 +168,3 @@ toc_in_text <- gsub("[\r\n]", "", toc_in_text)
 # JS Script utilizado para atualizar a DIV docs-toc
 tags$script(HTML(sprintf("document.getElementsByClassName('docs-toc')[0].innerHTML = '%s';", toc_in_text)))
 ```
-
-
