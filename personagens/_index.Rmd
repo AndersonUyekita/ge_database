@@ -58,7 +58,7 @@ gera_cod <- function(city, char_by_city) {
             tags$div(class="col mb-4",
                 tags$div(class="card h-100",
                     tags$div(class="container-fluid no-padding",
-                             style=paste0("background-image: url('", path,"%spersonagens/_index/", city,"_avatar_bg.png')"),
+                             style=paste0("background-image: url('", path,"personagens/_index/", city,"_avatar_bg.png')"),
                              style="background-repeat: no-repeat;
                                     background-size: cover;
                                     background-position: center center;
