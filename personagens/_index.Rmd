@@ -14,6 +14,10 @@ library(tidyverse)
 #path <- "/"
 path <- "https://andersonuyekita.github.io/ge_database/"
 
+tags$base(href=path)
+
+
+
 # Os endereços foram obtidos a partir do list.files() 
 base::source(file = "../../R/personagens_back_end.R", encoding = "UTF-8")
 base::source(file = "../../R/personagens_front_end.R", encoding = "UTF-8")
