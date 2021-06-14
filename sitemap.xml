@@ -2,78 +2,48 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://andersonuyekita.github.io/ge_database/li%C3%A7%C3%B5es-aprendidas/</loc>
-    <lastmod>2021-06-04T00:00:00+00:00</lastmod>
+    <loc>/shortcodes/alerts/</loc>
   </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/shortcodes/alerts/</loc>
+    <loc>/shortcodes/buttons/</loc>
   </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/getting-started/</loc>
+    <loc>/shortcodes/childpages/</loc>
   </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/getting-started/installation/</loc>
+    <loc>/shortcodes/</loc>
   </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/shortcodes/buttons/</loc>
+    <loc>/shortcodes/code/</loc>
   </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/configuration/</loc>
+    <loc>/shortcodes/collapse/</loc>
   </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/getting-started/usage/</loc>
+    <loc>/shortcodes/doublecode/</loc>
   </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/shortcodes/childpages/</loc>
+    <loc>/shortcodes/lead/</loc>
   </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/shortcodes/</loc>
+    <loc>/shortcodes/panel/</loc>
   </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/shortcodes/code/</loc>
-  </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/shortcodes/collapse/</loc>
-  </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/shortcodes/doublecode/</loc>
-  </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/shortcodes/lead/</loc>
-  </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/shortcodes/panel/</loc>
-  </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/post/aaaaaaaaaa/</loc>
+    <loc>/</loc>
     <lastmod>2021-06-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/</loc>
+    <loc>/personagens/amber/</loc>
     <lastmod>2021-06-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/personagens/amber/</loc>
+    <loc>/personagens/</loc>
     <lastmod>2021-06-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/post/2021-06-12-lalala/</loc>
-    <lastmod>2021-06-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/post/2021-06-12-novo-teste/</loc>
-    <lastmod>2021-06-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/personagens/</loc>
-    <lastmod>2021-06-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/post/</loc>
-    <lastmod>2021-06-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/post/2021-06-12-teste/</loc>
-    <lastmod>2021-06-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/post/2021-06-12-teste-post/</loc>
-    <lastmod>2021-06-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/post/2021-06-12-usando-o-copy/</loc>
-    <lastmod>2021-06-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/li%C3%A7%C3%B5es-aprendidas/panel-shortcode/</loc>
-    <lastmod>2021-06-04T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/li%C3%A7%C3%B5es-aprendidas/markdown-headers/</loc>
+    <loc>/personagens/sucrose/</loc>
     <lastmod>2021-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/personagens/sucrose/</loc>
-    <lastmod>2021-06-01T00:00:00+00:00</lastmod>
+    <loc>/personagens/albedo/</loc>
   </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/categories/</loc>
+    <loc>/tags/albedo/</loc>
   </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/shortcodes/table/</loc>
+    <loc>/personagens/barbara/</loc>
   </url><url>
-    <loc>https://andersonuyekita.github.io/ge_database/tags/</loc>
+    <loc>/tags/barbara/</loc>
+  </url><url>
+    <loc>/categories/</loc>
+  </url><url>
+    <loc>/shortcodes/table/</loc>
+  </url><url>
+    <loc>/tags/</loc>
   </url>
 </urlset>
