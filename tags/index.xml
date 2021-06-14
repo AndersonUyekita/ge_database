@@ -2,25 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on GE Database</title>
-    <link>/tags/</link>
+    <link>https://andersonuyekita.github.io/ge_database/tags/</link>
     <description>Recent content in Tags on GE Database</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>pt-br</language><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>pt-br</language><atom:link href="https://andersonuyekita.github.io/ge_database/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>albedo</title>
-      <link>/tags/albedo/</link>
+      <link>https://andersonuyekita.github.io/ge_database/tags/albedo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/tags/albedo/</guid>
+      <guid>https://andersonuyekita.github.io/ge_database/tags/albedo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>barbara</title>
-      <link>/tags/barbara/</link>
+      <link>https://andersonuyekita.github.io/ge_database/tags/barbara/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/tags/barbara/</guid>
+      <guid>https://andersonuyekita.github.io/ge_database/tags/barbara/</guid>
       <description></description>
     </item>
     
