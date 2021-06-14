@@ -19,8 +19,6 @@ base::source(file = "../../R/personagens_back_end.R", encoding = "UTF-8")
 base::source(file = "../../R/personagens_front_end.R", encoding = "UTF-8")
 ```
 
-
-
 ```{r carousel_intro, echo=FALSE, warning=FALSE, message=FALSE}
 # Carousel das Cidades de Mondstadt e Liyue
 carousel_wrapper()
