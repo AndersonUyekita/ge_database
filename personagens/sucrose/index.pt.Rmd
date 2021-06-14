@@ -30,7 +30,6 @@ base::source(file = "../../../R/personagens_back_end.R", encoding = "UTF-8")
 base::source(file = "../../../R/personagens_front_end.R", encoding = "UTF-8")
 ```
 
-
 <style>
 
 .bullet_ge {
@@ -106,17 +105,9 @@ tags$div(class="container-fluid no-padding",
 ```{r tipo_ataque, echo=FALSE, warning=FALSE, message=FALSE}
 
 airtable_GET(base = "talents", table = "atk") -> atk_tipo
-
-# Converte o JSON em Dataframe.
-    jsonlite::fromJSON(
-        txt = httr::content(
-            x = atk_tipo,
-            as = "text")
-        ) %>%
-        as.data.frame() -> atk_tipo_df
     
     # Faz o subset filtrando pelo personagem escolhido (name_) e elimina colunas não necessárias.
-    atk_tipo_df$records.fields %>%
+    atk_tipo$records.fields %>%
         dplyr::filter(name == "sucrose") %>%
         dplyr::select(-c(id,              # Remove as colunas: id, name, description_en e descriotion_pt
                          name)) -> atk_tipo_df_subset
@@ -132,14 +123,13 @@ combate_html <- tagList(
         tags$div(class="row",
             tags$div(class="col-sm",
                 tags$h6(class="genshin_font","Normal"),
-                tags$img(style="width:80%;",
-                         src="/personagens/sucrose/talent_sucrose_1.png")),
+                tags$img(style="content:url('../sucrose/talent_sucrose_1.png'); width:80%;")),
             tags$div(class="col-sm",
                 tags$img(style="width:80%;",
-                         src="/personagens/sucrose/talent_sucrose_2.png")),
+                         src="../sucrose/talent_sucrose_2.png")),
             tags$div(class="col-sm",
                 tags$img(style="width:80%;",
-                         src="/personagens/sucrose/talent_sucrose_3.png")))))
+                         src="../sucrose/talent_sucrose_3.png")))))
 
 
 passivo_html <- tagList(
