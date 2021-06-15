@@ -1,0 +1,52 @@
+---
+title: null
+description: "sadasd"
+disableReadmoreNav: true
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Carregando os packages que serão usados.
+library(magrittr)
+library(kableExtra)
+library(shiny)
+library(tidyverse)
+library(ggplot2)
+library(ggplotify)
+library(plotly)
+
+# Scripts
+base::source(file = "../R/personagens_back_end.R", encoding = "UTF-8")
+base::source(file = "../R/personagens_front_end.R", encoding = "UTF-8")
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+tags$div(class="container-fluid",
+    tags$div(class="row",
+             style="background-image: url('./bg.jpg');",
+             style="background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center center;
+                    width: 100%;",
+        tags$div(class="container-fluid",
+                 style="text-align: center; align-content: center;",
+                 tags$br(),
+                 tags$br(),
+                 tags$span(class="fa fa-exclamation-triangle fa-10x",
+                           `aria-hidden`="true",
+                           style="color:#ffac00"),
+                 tags$br(),
+                 tags$br(),
+                 tags$h1(class="genshin_font",
+                    style="color: #1c1c22",
+                    "Site em construção"),
+                 tags$br(),
+                 tags$br()
+                 )
+        ))
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+lead_wrapper(message = "Esse site é um exercício de programação. Muitos dos dados foram obtidos diretamente na internet.")
+```
+
+
