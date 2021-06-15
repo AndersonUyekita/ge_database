@@ -1,0 +1,31 @@
+---
+title: Yanfei
+author: TESTER
+date: 'NULL'
+slug: ''
+categories: []
+tags:
+  - yanfei
+disableReadmoreNav: yes
+---
+
+
+```{r libraries_sources, echo=FALSE, warning=FALSE, message=FALSE}
+
+# Carregando os packages que serão usados.
+library(magrittr)
+library(kableExtra)
+library(shiny)
+library(tidyverse)
+library(ggplot2)
+library(ggplotify)
+library(plotly)
+
+# Scripts
+base::source(file = "../../../R/personagens_back_end.R", encoding = "UTF-8")
+base::source(file = "../../../R/personagens_front_end.R", encoding = "UTF-8")
+```
+
+```{r ficha_tecnica, echo=FALSE, warning=FALSE, message=FALSE}
+ficha_tecnica_front(name = tail(strsplit(getwd(), "/")[[1]], n = 1))
+```

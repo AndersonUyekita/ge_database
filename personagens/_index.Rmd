@@ -62,7 +62,7 @@ gera_cod <- function(city, char_by_city) {
                                     background-position: center center;
                                     width: 100%;",
                              
-                             tags$a(href=sprintf("/personagens/%s", i),
+                             tags$a(href=sprintf("../personagens/%s", i),
                                 tags$div(style="text-align: center;", 
                                          tags$img(
                                            style=sprintf("content:url('../personagens/index/avatares/%s_avatar_%s.png')", city, i)

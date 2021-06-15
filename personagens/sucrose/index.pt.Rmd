@@ -9,11 +9,6 @@ toc: true
 draft: false
 ---
 
-<head>
-<script src="https://kit.fontawesome.com/d96daba58a.js" crossorigin="anonymous"></script>
-</head>
-
-
 ```{r libraries_sources, echo=FALSE, warning=FALSE, message=FALSE}
 
 # Carregando os packages que serão usados.
@@ -28,7 +23,27 @@ library(plotly)
 # Scripts
 base::source(file = "../../../R/personagens_back_end.R", encoding = "UTF-8")
 base::source(file = "../../../R/personagens_front_end.R", encoding = "UTF-8")
+
+# Personagem
+personagem <- "sucrose"
+
 ```
+
+
+```{r acesso_db, echo=FALSE, warning=FALSE, message=FALSE}
+
+# Acesso ao Banco de Dados do Airtable.
+# Tabela stats
+airtable_GET(base="stats",
+             table = "stats",
+             filter = paste0("?filterByFormula=name%3D%22", personagem,"%22")) -> stats
+
+# Acesso ao Banco de Dados do Airtable.
+# Tabela char
+airtable_GET(base = "stats",
+             table = "char") -> char_table
+```
+
 
 <style>
 
@@ -78,8 +93,7 @@ base::source(file = "../../../R/personagens_front_end.R", encoding = "UTF-8")
 
 ```{r ficha_tecnica, echo=FALSE, warning=FALSE, message=FALSE}
 # Ficha Técnica
-ficha_tecnica_front(name = "sucrose",
-                    description = "Uma alquimista cheia de curiosidade sobre todas as coisas. Ela pesquisa bioalquimia.")
+ficha_tecnica_front(name_ = "sucrose", df_char_table = char_table)
 ```
 
 <br>
@@ -88,7 +102,39 @@ ficha_tecnica_front(name = "sucrose",
 
 A cada level a personagem ganha de modo geral 64 de HP, 1.2 de ATK e 4.9 de DEF.
 
+
 ```{r atributos, echo=FALSE, warning=FALSE, message=FALSE}
+
+talents_wrapper(
+    txt_combat = tagList(
+        tags$div(class="container-fluid no-padding",
+            tags$div(class="row",
+                  grafico(name_ = "sucrose",
+                          atributo_ = "atk",
+                          df_stats = stats)
+                  )
+            )      
+    ),
+    txt_passive = HTML(
+    stats$records.fields %>%
+    filter(lvl %in% c(1,20,40,50,60,70,80,90)) %>%
+    arrange(ascension_lvl, lvl) %>%
+    select(ascension_lvl, lvl, hp, atk, def, bonus) %>%
+    kableExtra::kbl() %>%
+    kableExtra::kable_styling(
+        bootstrap_options = c("hover",
+                              "striped",
+                              "condensed")
+    )
+    ))
+```
+
+
+
+
+
+
+```{r atributos2, echo=FALSE, warning=FALSE, message=FALSE}
 
 tags$div(class="container-fluid no-padding",
     tags$div(class="row",
@@ -97,7 +143,7 @@ tags$div(class="container-fluid no-padding",
                 tags$h4("Content 1"),
                 tags$p("Text of Content 1"))),
         tags$div(class="w-50 p-3",
-            grafico(name_ = "sucrose", atributo_ = "atk"))
+            grafico(name_ = "sucrose", atributo_ = "atk", df_stats = stats))
         )
     )
 ```
@@ -123,13 +169,19 @@ combate_html <- tagList(
         tags$div(class="row",
             tags$div(class="col-sm",
                 tags$h6(class="genshin_font","Normal"),
-                tags$img(style="content:url('../sucrose/talent_sucrose_1.png'); width:80%;")),
+                tags$img(style="content:url('../sucrose/talent_sucrose_1.png'); width:80%;")
+                ),
             tags$div(class="col-sm",
-                tags$img(style="width:80%;",
-                         src="../sucrose/talent_sucrose_2.png")),
+                tags$h6(class="genshin_font","Skill"),
+                tags$img(style="content:url('../sucrose/talent_sucrose_2.png'); width:80%;")
+                ),
             tags$div(class="col-sm",
-                tags$img(style="width:80%;",
-                         src="../sucrose/talent_sucrose_3.png")))))
+                tags$h6(class="genshin_font","Burst"),
+                tags$img(style="content:url('../sucrose/talent_sucrose_3.png'); width:80%;")
+                )
+            )
+        )
+    )
 
 
 passivo_html <- tagList(
@@ -166,48 +218,35 @@ tags$div(class="container",
 )
 ```
 
-
-
-
-
-
 ```{r, echo=FALSE, warning=FALSE}
 
 talents_wrapper(
-  txt_combat = tagList(
-    panel_wrapper(tipo = "primary",
-                             header = "Criação do Espírito do Vento",
-                             body = media_wrapper()),
-    panel_wrapper(tipo = "danger",
-                             header = "criação do espírito do vento: experimento 6308",
-                             body = media_wrapper_2()),
-    panel_wrapper(tipo = "warning",
-                             header = "criação do espírito do vento proibido: Isomorfismo tipo 75-II",
-                             body = media_wrapper_2())
-  ),
-  txt_passive = "OI")
+    txt_combat = tagList(
+        panel_wrapper(tipo = "primary",
+                      header = "Criação do Espírito do Vento",
+                      body = "OI"),
+        panel_wrapper(tipo = "danger",
+                      header = "criação do espírito do vento: experimento 6308",
+                      body = "media_wrapper_2()"),
+        panel_wrapper(tipo = "warning",
+                      header = "criação do espírito do vento proibido: Isomorfismo tipo 75-II",
+                      body = "media_wrapper_2()")
+        ),
+    txt_passive = "OI")
 ```
 
-
-<a name="constelacao"><h2 style="padding-top: 60px; margin-top: -60px;">Constelação</h2></a>
-
-
-
+<a name="constelacao"><h2 style="padding-top: 60px; margin-top: -60px;" class="genshin_font">Constelação</h2></a>
 
 Aenean et dui et quam consectetur egestas ut et nibh. Donec congue aliquam mi ut rhoncus. Nullam efficitur ipsum at ligula pellentesque, sit amet venenatis nulla volutpat. Ut vitae placerat quam, dictum vestibulum nulla. In sed lacus non turpis fringilla bibendum. Etiam congue pretium tempus. Aliquam blandit imperdiet quam, at auctor mauris congue blandit. Mauris eget dignissim orci, sit amet hendrerit est. Nunc turpis dolor, porttitor et sapien in, vulputate porta quam. Etiam suscipit eget neque ac lacinia. Sed rhoncus eros sit amet finibus imperdiet. Proin a ipsum at tortor placerat lacinia et sit amet leo.
-
 
 ```{r tags, echo=FALSE, warning=FALSE}
 library(shiny)
 tags$p(class="lead" ,"OI OI SOAIJSOADJOIASJDIOSJD")
 ```
 
-
-
 ```{r}
 tags$span(class="bullet_ge")
 ```
-
 
 ```{r creating_toc, echo=FALSE}
 # Criação da sequência do TOC.

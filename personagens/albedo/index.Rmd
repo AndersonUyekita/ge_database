@@ -6,19 +6,26 @@ slug: ''
 categories: []
 tags:
   - albedo
+disableReadmoreNav: yes
 ---
 
-# Olá mundo!!
 
-Cadê a informação??
+```{r libraries_sources, echo=FALSE, warning=FALSE, message=FALSE}
 
-```{r}
-# Teste
+# Carregando os packages que serão usados.
+library(magrittr)
+library(kableExtra)
+library(shiny)
+library(tidyverse)
+library(ggplot2)
+library(ggplotify)
+library(plotly)
 
-a <- "2021-06-14T11:00:16-03:00"
-
-print(a)
-
+# Scripts
+base::source(file = "../../../R/personagens_back_end.R", encoding = "UTF-8")
+base::source(file = "../../../R/personagens_front_end.R", encoding = "UTF-8")
 ```
 
-/
+```{r ficha_tecnica, echo=FALSE, warning=FALSE, message=FALSE}
+ficha_tecnica_front(name = tail(strsplit(getwd(), "/")[[1]], n = 1))
+```
