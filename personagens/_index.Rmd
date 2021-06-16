@@ -34,12 +34,10 @@ airtable_GET(base = "stats",
 
 # Subsetting 
 char_df$records.fields %>%
-  select(name, element,city, weapon_type) %>%
-  arrange(desc(city), name) ->
+  select(name, vision, nation, weapon_type) %>%
+  arrange(desc(nation), name) ->
   char_df_tidy
 ```
-
-
 
 ```{r exemplo2, echo=FALSE, warning=FALSE, message=FALSE}
 
@@ -88,7 +86,7 @@ gera_cod <- function(city, char_by_city) {
                                      
                                 # Elemento do personagem
                                 tags$div(class="col-6",
-                                    elemental_icon(vision = char_df_tidy %>% filter(name == i) %>% select(element))
+                                    elemental_icon(vision = char_df_tidy %>% filter(name == i) %>% select(vision))
                                     ),
                                 
                                 # Weapon
@@ -117,6 +115,8 @@ gera_cod <- function(city, char_by_city) {
 
 <a name="chars_mondstadt"><h2 class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Mondstadt</h2></a>
 
+Atualmente a nação de Mondstadt possui `r char_df$records.fields %>% filter(nation == "mondstadt") %>% nrow()` personagens jogáveis. Sendo `r char_df$records.fields %>% filter(nation == "mondstadt") %>% filter(gender == "male") %>% nrow()` homens e `r char_df$records.fields %>% filter(nation == "mondstadt") %>% filter(gender == "female") %>% nrow()` mulheres.
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # 
 tagAppendChild(
@@ -124,12 +124,14 @@ tagAppendChild(
         class="row row-cols-1 row-cols-md-4"),
     tagList(gera_cod(city = "mon",
                      char_by_city = char_df_tidy %>%
-                       filter(city == "mondstadt") %>%
+                       filter(nation == "mondstadt") %>%
                        select(name) %>%
                        as.matrix())))
 ```
 
 <a name="chars_liyue"><h2 class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Porto de Liyue</h2></a>
+
+Atualmente a nação de Liyue possui `r char_df$records.fields %>% filter(nation == "liyue") %>% nrow()` personagens jogáveis. Sendo `r char_df$records.fields %>% filter(nation == "liyue") %>% filter(gender == "male") %>% nrow()` homens e `r char_df$records.fields %>% filter(nation == "liyue") %>% filter(gender == "female") %>% nrow()` mulheres.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # 
@@ -138,7 +140,7 @@ tagAppendChild(
         class="row row-cols-1 row-cols-md-4"),
     tagList(gera_cod(city = "liy",
                      char_by_city = char_df_tidy %>%
-                       filter(city == "liyue") %>%
+                       filter(nation == "liyue") %>%
                        select(name) %>%
                        as.matrix())))
 ```
@@ -152,7 +154,7 @@ tagAppendChild(
         class="row row-cols-1 row-cols-md-4"),
     tagList(gera_cod(city = "sne",
                      char_by_city = char_df_tidy %>%
-                       filter(!(city %in% c("mondstadt", "liyue", "paimon"))) %>%
+                       filter(!(nation %in% c("mondstadt", "liyue", "NA"))) %>%
                        select(name) %>%
                        as.matrix())))
 ```
