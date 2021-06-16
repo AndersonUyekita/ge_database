@@ -270,82 +270,54 @@ toc_in_text <- gsub("[\r\n]", "", toc_in_text)
 tags$script(HTML(sprintf("document.getElementsByClassName('docs-toc')[0].innerHTML = '%s';", toc_in_text)))
 ```
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-  Launch static backdrop modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-<div class="modal-dialog modal-xl modal-dialog-centered">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-<span aria-hidden="true">&times;</span>
-</button>
-</div>
-<div class="modal-body">
-<iframe class="flexdashboard" src="./flexdashboard_sucrose.html" style = "width: 100%; height:95vh;"></iframe>
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-<button type="button" class="btn btn-primary">Understood</button>
-</div>
-</div>
-</div>
-</div>
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#testesemoiframe">
-  Launch static backdrop modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="testesemoiframe" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="testesemoiframeLabel" aria-hidden="true">
-<div class="modal-dialog modal-xl modal-dialog-centered">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="testesemoiframeLabel">Modal title</h5>
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-<span aria-hidden="true">&times;</span>
-</button>
-</div>
-<div class="modal-body">
-<p>TESTE QUALQUER</p>
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-<button type="button" class="btn btn-primary">Understood</button>
-</div>
-</div>
-</div>
-</div>
+<br>
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-Launch demo modal
-</button>
+```{r, echo=FALSE}
+tags$button(type="button",
+            class="btn btn-primary",
+            `data-toggle`="modal",
+            `data-target`="#exampleModal",
+            "Detalhes")
+```
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-<span aria-hidden="true">&times;</span>
-</button>
-</div>
-<div class="modal-body">
-...
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-<button type="button" class="btn btn-primary">Save changes</button>
-</div>
-</div>
-</div>
-</div>
+```{r, echo=FALSE}
+tags$div(class="modal fade",
+         id="exampleModal",
+         `data-keyboard`="false",
+         tabindex="-1",
+         `aria-labelledby`="staticBackdropLabel",
+         `aria-hidden`="true",
+    tags$div(class="modal-dialog modal-xl modal-dialog-centered",
+        tags$div(class="modal-content",
+            tags$div(class="modal-header",
+                tags$h5(class="modal-title",
+                        id="staticBackdropLabel",
+                        "Modal title"),
+                tags$button(type="button",
+                            class="close",
+                            `data-dismiss`="modal",
+                            `aria-label`="Close",
+                    tags$span(`aria-hidden`="true",
+                              HTML("&times;"))
+                )
+            ),
+            tags$div(class="modal-body",
+                tags$iframe(class="flexdashboard",
+                            src=sprintf("./flexdashboard_%s.html", personagem),
+                            style="width:100%; height:95vh;")
+                ),
+            tags$div(class="modal-footer",
+                tags$button(type="button",
+                            class="btn btn-secondary",
+                            `data-dismiss`="modal",
+                            "Close"),
+                tags$button(type="button",
+                            class="btn btn-primary",
+                            "Understood"))
+        )
+    )
+)
+```
