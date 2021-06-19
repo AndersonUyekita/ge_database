@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Culinária on GE Database</title>
+    <link>https://db.genshinimpactbr.com.br/culinaria/</link>
+    <description>Recent content in Culinária on GE Database</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Thu, 17 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://db.genshinimpactbr.com.br/culinaria/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cozinhar</title>
+      <link>https://db.genshinimpactbr.com.br/culinaria/cozinhar/</link>
+      <pubDate>Fri, 18 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://db.genshinimpactbr.com.br/culinaria/cozinhar/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Processar</title>
+      <link>https://db.genshinimpactbr.com.br/culinaria/processar/</link>
+      <pubDate>Fri, 18 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://db.genshinimpactbr.com.br/culinaria/processar/</guid>
+      <description>ProcessarA função processar os ingredientes faz parte de todo o processo de preparação dos alimentos. Atualmente é possível processar 12 tipos de ingredientes.</description>
+    </item>
+    
+  </channel>
+</rss>

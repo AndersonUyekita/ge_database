@@ -1,0 +1,58 @@
+---
+title: Pratos
+author: ''
+date: '2021-06-17'
+slug: []
+categories: []
+tags: []
+weight: 2
+disableReadmoreNav: true
+---
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+library(shiny)
+
+tags$div(class="card",
+         style="width: 20rem; border-radius:0; border: 0;",
+         tags$div(class="card-header genshin_font",
+                  style="text-align: center;",
+                  "Panqueca do Chá da Tarde"),
+         tags$div(class="container-fluid",
+                  style="padding-right: 1rem; background-color: #28a745; border-bottom: 0.25rem solid rgba(0,0,0,0.25);",
+            tags$div(class="row",
+                tags$div(class="col-6",
+                    tags$div(class="row h-50",
+                             style="padding:0.5rem; padding-left:1.25rem;",
+                        tags$p("Alimento")),
+                    tags$div(class="row h-50",
+                             style="display: grid; align-content: end; padding:0.5rem; padding-left:1.25rem;",
+                        tags$i(class="fa fa-star",
+                               `aria-hidden`="true")
+                        )
+                    ),
+                tags$div(class="col-6",
+                    tags$img(class="card-img-top",
+                  alt="ALT da figura.",
+                  src="./special_dish.png")))),
+         tags$div(class="card-body",
+                  style="background-color:#ebe5d8; padding-bottom: 3rem;",
+             tags$p(class="genshin_font",
+                    style="color:#1c1c22",
+                    HTML("&#8226;"),
+                    "Some quick example text to build on the card title and make up the bulk of the card's content."),
+             tags$p(class="genshin_font",
+                    style="color:#9a9c9e",
+                    "Some quick example text to build on the card title and make up the bulk of the card's content."),
+             tags$span(class="d-inline-block",
+                       style="padding-bottom:0.5rem;",
+                       tags$i(class="fa fa-map-marker",
+                               `aria-hidden`="true"),
+                       "Fonte"
+             ),
+             tags$div(style="border:2px solid rgba(0,0,0,.125); padding:0.25rem;",
+                      "Obtém ao Cozinhar")
+             )
+         )
+```

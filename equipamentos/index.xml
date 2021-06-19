@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Equipamentos on GE Database</title>
+    <link>https://db.genshinimpactbr.com.br/equipamentos/</link>
+    <description>Recent content in Equipamentos on GE Database</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Thu, 17 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://db.genshinimpactbr.com.br/equipamentos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Armas</title>
+      <link>https://db.genshinimpactbr.com.br/equipamentos/armas/</link>
+      <pubDate>Thu, 17 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://db.genshinimpactbr.com.br/equipamentos/armas/</guid>
+      <description>Armas</description>
+    </item>
+    
+    <item>
+      <title>Artefatos</title>
+      <link>https://db.genshinimpactbr.com.br/equipamentos/artefatos/</link>
+      <pubDate>Thu, 17 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://db.genshinimpactbr.com.br/equipamentos/artefatos/</guid>
+      <description>Artefatos</description>
+    </item>
+    
+    <item>
+      <title>Conjuntos (Sets)</title>
+      <link>https://db.genshinimpactbr.com.br/equipamentos/conjuntos/</link>
+      <pubDate>Thu, 17 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://db.genshinimpactbr.com.br/equipamentos/conjuntos/</guid>
+      <description>Conjuntos (Sets)</description>
+    </item>
+    
+  </channel>
+</rss>

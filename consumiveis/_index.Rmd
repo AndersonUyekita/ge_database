@@ -1,0 +1,68 @@
+---
+title: "Consumíveis"
+description: "sadasd"
+disableReadmoreNav: true
+---
+
+Adotou-se que os consumíveis são os `alimentos` e as `bebidas`, logo de maneira indireta os ingredientes serão consumidos.
+
+* Alimentos
+    * Ingredientes
+* Bebidas
+
+### Alimentos / Prato
+
+Os alimentos são itens consumíveis que conferem ao usuário normalmente um dos seguintes efeitos:
+
+* Regenerar HP;
+* Reviver um personagem;
+* Diminuir consumo de Stamina;
+* Aumentar o ATK;
+* Aumentar o Dano Físico;
+* Aumentar a DEF;
+* Aumentar a RES, etc..
+
+Ressalta-se que há pratos que podem dar mais de um efeito.
+
+#### Nível de preparação
+
+Cada alimento obtido ao longo do jogo possui 4 (quatro) níveis de preparação:
+
+* Esquisito;
+* Normal;
+* Delicioso, e;
+* Prato Especial.
+
+#### Classificação do Prato
+
+Note que cada prato também é classificado de acordo com a sua "raridade", sendo que este varia entre 1 e 5 estrelas.
+
+<i class="fa fa-star" aria-hidden="true"></i> Fundo cinza
+
+
+<i class="fa fa-star" aria-hidden="true"></i>
+<i class="fa fa-star" aria-hidden="true"></i> Fundo verde
+
+
+<i class="fa fa-star" aria-hidden="true"></i>
+<i class="fa fa-star" aria-hidden="true"></i>
+<i class="fa fa-star" aria-hidden="true"></i> Fundo azul
+
+
+<i class="fa fa-star" aria-hidden="true"></i>
+<i class="fa fa-star" aria-hidden="true"></i>
+<i class="fa fa-star" aria-hidden="true"></i>
+<i class="fa fa-star" aria-hidden="true"></i> Fundo roxo
+
+
+<i class="fa fa-star" aria-hidden="true"></i>
+<i class="fa fa-star" aria-hidden="true"></i>
+<i class="fa fa-star" aria-hidden="true"></i>
+<i class="fa fa-star" aria-hidden="true"></i>
+<i class="fa fa-star" aria-hidden="true"></i> Fundo Laranja
+
+
+### Bebidas
+
+As bebidas só possuem um único nível de preparação.
+

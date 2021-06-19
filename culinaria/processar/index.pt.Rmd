@@ -1,0 +1,17 @@
+---
+title: Processar
+author: ''
+date: '2021-06-18'
+slug: []
+categories: []
+tags: []
+disableReadmoreNav: true
+weight: 2
+---
+
+
+
+
+<h3 id="processar" class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Processar</h3>
+
+A função `processar` os ingredientes faz parte de todo o processo de preparação dos alimentos. Atualmente é possível processar 12 tipos de ingredientes.
