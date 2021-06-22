@@ -16,16 +16,5 @@
       <description>kbd {padding: .1rem .3rem;background-color: #d3bc8e;color: #1c1c22;}.table th {border-top: 0px;}p {text-align: justify;}Caçador de CervosRestaurante de WanminAlbergue WangshuFogueiraA funçãoculináriaé utilizada para a criação de itens consumíveis. Ela pode ser habilitada todas as vezes que um personagem jogável se aproxima de uma fogueira acesa (e munida de uma panela) ou de fogões localizadas nas cidades.</description>
     </item>
     
-    <item>
-      <title>Pratos</title>
-      <link>https://db.genshinimpactbr.com.br/consumiveis/pratos/</link>
-      <pubDate>Thu, 17 Jun 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://db.genshinimpactbr.com.br/consumiveis/pratos/</guid>
-      <description>Panqueca do Chá da TardeAlimento
-&amp;#8226;Some quick example text to build on the card title and make up the bulk of the card&#39;s content.Some quick example text to build on the card title and make up the bulk of the card&#39;s content.
-FonteObtém ao Cozinhar</description>
-    </item>
-    
   </channel>
 </rss>

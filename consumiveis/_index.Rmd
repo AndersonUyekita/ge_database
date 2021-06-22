@@ -2,6 +2,7 @@
 title: "Consumíveis"
 description: "sadasd"
 disableReadmoreNav: true
+disable_comments: false
 ---
 
 Adotou-se que os consumíveis são os `alimentos` e as `bebidas`, logo de maneira indireta os ingredientes serão consumidos.
