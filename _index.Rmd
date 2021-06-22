@@ -14,6 +14,9 @@ library(ggplot2)
 library(ggplotify)
 library(plotly)
 
+# Chunk config
+knitr::opts_chunk$set(echo=FALSE,message=FALSE,warning=FALSE)
+
 # Scripts
 base::source(file = "../R/personagens_back_end.R", encoding = "UTF-8")
 base::source(file = "../R/personagens_front_end.R", encoding = "UTF-8")
@@ -49,4 +52,13 @@ tags$div(class="container-fluid",
 lead_wrapper(message = "Esse site é um exercício de programação. Muitos dos dados foram obtidos diretamente na internet.")
 ```
 
-
+```{r}
+tagList(
+    tags$a(class="twitter-timeline",
+       href="https://twitter.com/GenshinImpact",
+       "Tweets by TwitterDev"),
+tags$script("async",
+            src="https://platform.twitter.com/widgets.js",
+            charset="utf-8")
+)
+```

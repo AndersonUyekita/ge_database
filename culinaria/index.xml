@@ -22,7 +22,8 @@
       <pubDate>Fri, 18 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>https://db.genshinimpactbr.com.br/culinaria/processar/</guid>
-      <description>ProcessarA função processar os ingredientes faz parte de todo o processo de preparação dos alimentos. Atualmente é possível processar 12 tipos de ingredientes.</description>
+      <description>$(document).ready(function(){$(&#39;[data-toggle=&#34;popover-hover&#34;]&#39;).popover({html: true,trigger: &#39;hover&#39;,placement: &#39;top&#39;,}); });ProcessarO processamento de alimentos é necessário para atransformaçãode ingredientes brutos em novos ingredientes.Atualmente a função processar presente na função culinária pode gerar 12 novos ingredientes, das quais serão utilizados na elaboração de outros pratos.
+O processamento de alimentos não é imediato, desta forma cada novo ingrediente possui um tempo de preparo.</description>
     </item>
     
   </channel>

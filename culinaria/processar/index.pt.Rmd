@@ -8,10 +8,276 @@ tags: []
 disableReadmoreNav: true
 weight: 2
 ---
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="popover-hover"]').popover({
+      html: true,
+      trigger: 'hover',
+      placement: 'top',
+    });   
+});
+</script>
 
 
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(shiny)
+library(magrittr)
+library(kableExtra)
+library(tidyverse)
 
-<h3 id="processar" class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Processar</h3>
+knitr::opts_chunk$set(echo=FALSE,message=FALSE,warning=FALSE)
 
-A função `processar` os ingredientes faz parte de todo o processo de preparação dos alimentos. Atualmente é possível processar 12 tipos de ingredientes.
+# QUantidades de pasta para "voltar" até database.
+#tail(str_split(string = dirname(rstudioapi::getSourceEditorContext()$path), pattern = "/")[[1]], -5)
+#j <- ""
+#
+#for (i in rep("../", 3)) {
+#    j <- paste0(j, i)
+#}
+
+# Scripts
+base::source(file = "../../../R/personagens_back_end.R", encoding = "UTF-8")
+base::source(file = "../../../R/personagens_front_end.R", encoding = "UTF-8")
+source("../../../R/consumiveis.R", encoding = "UTF-8")
+```
+
+
+```{r}
+tags$div(class="card bg-dark text-white",
+         style="margin-bottom: 1rem;",
+    tags$img(src="./bg.png",
+        style="filter: brightness(0.6);"),
+    tags$div(class="card-img-overlay",
+             style="justify-content: center; display: flex; align-items: center; height: 100%;",
+             tags$h1(class="card-title genshin_font",
+                     "Processar")
+             )
+)
+```
+
+```{r lead}
+lead_wrapper(
+    message =
+        tags$span("O processamento de alimentos é necessário para a",
+    tags$strong("transformação"),
+    " de ingredientes brutos em novos ingredientes.")
+)
+```
+
+Atualmente a função `processar` presente na função `culinária` pode gerar 12 novos ingredientes, das quais serão utilizados na elaboração de outros pratos.
+
+```{r alert-warning-duration}
+# SUCCESS ALERT do Nível de Preparação
+alert_icon(type = "warning",
+           message = tagList(
+              tags$span(
+                  "O processamento de alimentos ",
+                  tags$strong("não é  imediato"),
+                  ", desta forma cada novo ingrediente possui um tempo de preparo."
+              ))
+           )
+```
+
+A tabela abaixo apresenta um resumo do ingrediente.
+
+```{r}
+
+tags$table(class="table table-striped table-hover",
+           style="margin-left: auto; margin-right: auto; table-layout: fixed;",
+           tags$thead(
+                tags$tr(
+                    tags$th(style="text-align: center; vertical-align: middle;",
+                        "Produto"),
+                    tags$th(style="text-align: center; vertical-align: middle;",
+                        "Ranking"),
+                    tags$th(style="text-align: center; vertical-align: middle;",
+                        "Duração [minutos]"),
+                    tags$th(style="text-align: center; vertical-align: middle;",
+                        "Ingredientes")
+                )
+           ),
+           tags$tbody(
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_flour.png", style="width: 40%;"),
+                            tags$p(class="genshin_font", "Farinha")),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"))),
+                    tags$td(style="text-align: center; vertical-align: middle;","1"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_wheat.png", style="width: 25%;",
+                                     `data-toggle`="popover-hover",
+                                     title=tags$h1("H1"),
+                                     `data-content`=tags$span("Olha o texto!")))
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_raw_meat.png", style="width:40%;"),
+                            tags$p(class="genshin_font", "Carne Crua")),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"))),
+                    tags$td(style="text-align: center; vertical-align: middle;","1"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_chilled_meat.png", style="width: 25%;"))
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_sugar.png", style="width:40%;"),
+                            tags$p(class="genshin_font", "Açúcar")),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"))),
+                    tags$td(style="text-align: center; vertical-align: middle;","3"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_sweet_flower.png", style="width:25%;"),
+                            tags$img(src="./ingredient_sweet_flower.png", style="width:25%;"))
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_cream.png", style="width:40%;"),
+                            tags$p(class="genshin_font", "Creme")),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"))),
+                    tags$td(style="text-align: center; vertical-align: middle;","3"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_milk.png", style="width:25%;"))
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_smoked_fowl.png", style="width:40%;"),
+                            tags$p(class="genshin_font", "Carne de Ave Defumada")),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"))),
+                    tags$td(style="text-align: center; vertical-align: middle;","5"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_fowl.png", style="width:25%;"),
+                            tags$img(src="./ingredient_fowl.png", style="width:25%;"),
+                            tags$img(src="./ingredient_fowl.png", style="width:25%;"),
+                            tags$img(src="./ingredient_salt.png", style="width:25%;"))
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_ham.png", style="width:40%;"),
+                            tags$p(class="genshin_font", "Presunto")),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"))),
+                    tags$td(style="text-align: center; vertical-align: middle;","5"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_raw_meat.png", style="width:25%;"),
+                            tags$img(src="./ingredient_raw_meat.png", style="width:25%;"),
+                            tags$img(src="./ingredient_salt.png", style="width:25%;"))
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_butter.png", style="width:40%;"),
+                            tags$p(class="genshin_font", "Manteiga")),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"))),
+                    tags$td(style="text-align: center; vertical-align: middle;","5"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_milk.png", style="width:25%;"),
+                            tags$img(src="./ingredient_milk.png", style="width:25%;"))
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_cheese.png", style="width:40%;"),
+                            tags$p(class="genshin_font", "Queijo")),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"))),
+                    tags$td(style="text-align: center; vertical-align: middle;","10"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_milk.png", style="width:25%;"),
+                            tags$img(src="./ingredient_milk.png", style="width:25%;"),
+                            tags$img(src="./ingredient_milk.png", style="width:25%;"))
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_jam.png", style="width:40%;"),
+                            tags$p(class="genshin_font", "Geleia")),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"))),
+                    tags$td(style="text-align: center; vertical-align: middle;","10"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_sunsettia.png", style="width:25%;"),
+                            tags$img(src="./ingredient_sunsettia.png", style="width:25%;"),
+                            tags$img(src="./ingredient_sunsettia.png", style="width:25%;"),
+                            tags$img(src="./ingredient_berry.png", style="width:25%;"),
+                            tags$img(src="./ingredient_berry.png", style="width:25%;"),
+                            tags$img(src="./ingredient_sugar.png", style="width:25%;"))
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_bacon.png", style="width:40%;"),
+                            tags$p(class="genshin_font", "Bacon")),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"))),
+                    tags$td(style="text-align: center; vertical-align: middle;","15"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_raw_meat.png", style="width:25%;"),
+                            tags$img(src="./ingredient_raw_meat.png", style="width:25%;"),
+                            tags$img(src="./ingredient_salt.png", style="width:25%;"),
+                            tags$img(src="./ingredient_salt.png", style="width:25%;"))
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_crab_roe.png", style="width:40%;"),
+                            tags$p(class="genshin_font", "Ovas de Caranguejo")),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"))),
+                    tags$td(style="text-align: center; vertical-align: middle;","20"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_crab.png", style="width:25%;"),
+                            tags$img(src="./ingredient_crab.png", style="width:25%;"),
+                            tags$img(src="./ingredient_crab.png", style="width:25%;"),
+                            tags$img(src="./ingredient_crab.png", style="width:25%;"))
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$img(src="./ingredient_sausage.png", style="width:40%;"),
+                            tags$p(class="genshin_font", "Salsicha")),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true", style="color: #FFDF00"))),
+                    tags$td(style="text-align: center; vertical-align: middle;","20"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(
+                                tags$img(src="./ingrediente_carne_crua.png", style="width:20%;"),
+                                tags$img(src="./ingrediente_carne_crua.png", style="width:20%;"),
+                                tags$img(src="./ingrediente_carne_crua.png", style="width:20%;")
+                            ))
+                )
+           ))
+```
+
+
+O `processamento` possui uma fila de execução de trabalhos de até **99 slots**, onde cada ingrediente será produzido de maneira unitária.
+
+```{r alert-warning-cancel}
+# SUCCESS ALERT do Nível de Preparação
+alert_icon(type = "warning",
+           message = tagList(
+              tags$span(
+                  "Preste atenção com a fila de execução, pois",
+                  tags$strong("não é possível cancelar"),
+                  "o processamento de ingredientes."
+              ))
+           )
+```

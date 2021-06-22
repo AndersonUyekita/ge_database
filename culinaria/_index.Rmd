@@ -27,15 +27,11 @@ text-align: justify;
 
 </style>
 
-
-
-
-
-
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(shiny)
 library(magrittr)
 library(kableExtra)
+library(tidyverse)
 
 knitr::opts_chunk$set(echo=FALSE,message=FALSE,warning=FALSE)
 
@@ -43,9 +39,7 @@ knitr::opts_chunk$set(echo=FALSE,message=FALSE,warning=FALSE)
 source("../../R/consumiveis.R", encoding = "UTF-8")
 ```
 
-
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r carousel}
 library(shiny)
 
 # Função Carousel
@@ -118,7 +112,7 @@ tags$p(class="lead",
        tags$em("A função", tags$strong("culinária"), "é utilizada para a criação de itens consumíveis. Ela pode ser habilitada todas as vezes que um personagem jogável se aproxima de uma fogueira acesa (e munida de uma panela) ou de fogões localizadas nas cidades."))
 ```
 
-```{r echo=FALSE}
+```{r lead}
 tags$div(class="alert alert-primary",
          role="alert",
          tags$h4("Resumo"),
@@ -143,21 +137,15 @@ Ambos restauram míseros 300 de Vida. Portanto, eles só serão úteis para os p
 
 Antes de cozinhar qualquer prato será necessário obter as `receitas`. Você poderá comprar as receitas de ranking menores nos NPC's localizados nas cidades de Mondstadt e Liyue, além de encontrá-las nos baús ou em outras interações com o jogo.
 
-```{r echo=FALSE}
-tags$div(class=sprintf("alert alert-%s", "warning"),
-         role="alert",
-         tags$div(class="container-fluid",
-                  style="padding: 0; margin: 0;",
-                  tags$div(class="row align-items-center",
-                           style="padding: 0; margin: 0;",
-                           tags$div(class="col-1",
-                                    style="padding-left: 0;",
-                                    tags$i(class="fa fa-exclamation-triangle fa-3x",
-                                           `aria-hidden`="true")),
-                           tags$div(class="col-11",
-                                    tags$span(tags$span("Os pratos são habilitados para cozinhar somente após você",
-                                                     tags$strong("aprender"), "."),
-                                              tags$p("Fogão > Cozinhar / Todos > Selecionar Receita > Aprender"))))))
+```{r alert-culinaria}
+# WARNING ALERT do Nível de Preparação
+alert_icon(type = "warning",
+           message = tagList(
+             tags$span("Os pratos são habilitados para cozinhar somente após você",
+                       tags$strong("aprender"), "."),
+             tags$p("Fogão > Cozinhar / Todos > Selecionar Receita > Aprender")
+           )
+)
 ```
 
 Em algumas receitas será necessário `processar` alguns alimentos antes de preparar o prato ou comprá-las nos NPC's.
@@ -166,7 +154,7 @@ Em algumas receitas será necessário `processar` alguns alimentos antes de prep
 
 O mecanismo da culinária é uma alusão ao tempo de cocção do prato na vida real, caso o prato seja finalizado antes ou muito depois do tempo ideal os seus efeitos não serão maximizados.
 
-```{r echo=FALSE}
+```{r carousel-cozinhar}
 
 # Insere um Carousel
 two_columns_carousel_text(
@@ -205,7 +193,7 @@ two_columns_carousel_text(
 
 A proficiência é necessária apenas para habilitar o `autocozinhar`, a condição para obter a proficiência é a preparação de um certo número de pratos `perfeitos`. De acordo com o nível do prato haverá uma maior necessidade de pratos `perfeitos`.
 
-```{r echo=FALSE}
+```{r table-cook-proficiency}
 tags$table(class="table table-striped table-hover",
            style="margin-left: auto; margin-right: auto; table-layout: fixed;",
            tags$thead(
@@ -279,12 +267,14 @@ two_columns_carousel_text(
     config = "1")
 ```
 
-```{r echo=FALSE}
-# SUCCESS ALERT do Nível de Preparação
+```{r alert-proficiency}
+# WARNING ALERT do Nível de Preparação
 alert_icon(type = "warning",
            message = tagList(
-              tags$span("Somente os pratos", tags$strong("perfeitos"),"serão contabilizados para a proficiência.")
-                        )
+              tags$span("Somente os pratos",
+                        tags$strong("perfeitos"),
+                        "serão contabilizados para a proficiência.")
+              )
            )
 ```
 
@@ -305,7 +295,7 @@ Exemplos:
 
 <h5 id="qualidade" class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Nível de preparação</h5>
 
-```{r echo=FALSE}
+```{r carousel-dish-quality}
 
 # Insere um Carousel
 two_columns_carousel_text(
@@ -346,7 +336,7 @@ two_columns_carousel_text(
     )
 ```
 
-```{r echo=FALSE}
+```{r alert-dish-quality}
 # SUCCESS ALERT do Nível de Preparação
 alert_icon(type = "success",
            message = tagList(
@@ -364,15 +354,13 @@ Os pratos preparados possuem uma probabilidade de terem um bônus de acordo com 
 
 O exemplo abaixo diz respeito ao prato **Espeto de Frango com Cogumelos** que possui uma probabilidade de 12% de ter um <kbd>bônus de produção em dobro</kbd> em comidas de efeito de regeneração de vida quando `Jean`, `Diona` ou `Barbara` são os cozinheiros. Ao passo que `Kaeya` possui uma probabilidade de 20% de produzir um <kbd>prato especial</kbd> independente do nível de preparação. Para os demais personagens não há bônus algum para este específico prato de regeneração de vida.
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(kableExtra)
-library(tidyverse)
-library(magrittr)
-
+```{r carousel-chef}
+# Table preparation
 bonus <- c("Produção em dobro", "Prato Especial")
 probabilidade <- c("12%", "20%")
 condicao <- c("Nível de Preparação Perfeito.", "Não há.")
 
+# Creating DataFrame.
 data.frame(bonus, probabilidade, condicao) %>%
   kbl(col.names = c("Bônus", "Probabilidade", "Condição")) %>%
   kable_styling(full_width = TRUE,
@@ -410,7 +398,7 @@ two_columns_carousel_text(
     ))
 ```
 
-```{r echo=FALSE}
+```{r alert-chef}
 # SUCCESS ALERT do Nível de Preparação
 alert_icon(type = "warning",
            message = tagList(
@@ -420,9 +408,22 @@ alert_icon(type = "warning",
 
 <h5 id="autocozinhar" class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Autocozinhar</h5>
 
-A opção de `Autocozinhar` será desbloqueada somente após a obtenção da `proficiência`, essa opção possibilita a preparação de até 99 pratos de uma vez só. Cabe ressaltar que os bônus concedidos pelos `cozinheiros` continuakm valendo para essa forma de cozinhar.
+A opção de `Autocozinhar` será desbloqueada somente após a obtenção da `proficiência`, essa opção possibilita a preparação de até 99 pratos de uma vez só. Cabe ressaltar que os bônus concedidos pelos `cozinheiros` continuam valendo para essa forma de cozinhar.
 
-```{r echo=FALSE}
+```{r alert-warning-autocook}
+# SUCCESS ALERT do Nível de Preparação
+alert_icon(type = "warning",
+           message = tagList(
+              tags$span(
+                  "Não há como cancelar o",
+                  tags$strong("autocozinhar"),
+                  ", pois o processo é instantâneo."
+              ))
+           )
+```
+
+
+```{r alert-success-autocook}
 # SUCCESS ALERT do Nível de Preparação
 alert_icon(type = "success",
            message = tagList(
@@ -432,8 +433,7 @@ alert_icon(type = "success",
            )
 ```
 
-
-```{r creating_toc, echo=FALSE}
+```{r creating-toc}
 # Criação da sequência do TOC.
 '<nav id="TableOfContents">
 <ul>
