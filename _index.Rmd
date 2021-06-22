@@ -1,7 +1,7 @@
 ---
-title: null
-description: "sadasd"
+description: ""
 disableReadmoreNav: true
+disable_comments: true
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -53,12 +53,32 @@ lead_wrapper(message = "Esse site é um exercício de programação. Muitos dos 
 ```
 
 ```{r}
-tagList(
-    tags$a(class="twitter-timeline",
-       href="https://twitter.com/GenshinImpact",
-       "Tweets by TwitterDev"),
-tags$script("async",
-            src="https://platform.twitter.com/widgets.js",
-            charset="utf-8")
-)
+tags$div(class="container-fluid",
+    tags$div(class="row",
+        tags$div(class="col-6",
+            tagList(
+                tags$a(class="twitter-timeline",
+                   href="https://twitter.com/GenshinImpact"),
+                tags$script("async",
+                            src="https://platform.twitter.com/widgets.js",
+                            charset="utf-8")
+                )
+            ),
+        tags$div(class="col-6",
+            tags$h4("Mapa"))
+        )
+    )
+```
+
+```{r creating_toc, echo=FALSE}
+# Criação da sequência do TOC.
+'' -> toc_in_text
+
+# É necessário retirar todos os espaços em brancos: Return Carriage e Nova linhas.
+# Se não fizer isso dá problema na exibição do HTML no TOC.
+toc_in_text <- gsub("[\r\n]", "", toc_in_text)
+
+# Atualiza o TOC
+# JS Script utilizado para atualizar a DIV docs-toc
+tags$script(HTML(sprintf("document.getElementsByClassName('docs-toc')[0].innerHTML = '%s';", toc_in_text)))
 ```

@@ -259,9 +259,9 @@ tags$table(class="table table-striped table-hover",
                     tags$td(style="text-align: center; vertical-align: middle;","20"),
                     tags$td(style="text-align: center; vertical-align: middle;",
                             tags$span(
-                                tags$img(src="./ingrediente_carne_crua.png", style="width:20%;"),
-                                tags$img(src="./ingrediente_carne_crua.png", style="width:20%;"),
-                                tags$img(src="./ingrediente_carne_crua.png", style="width:20%;")
+                                tags$img(src="./ingredient_raw_meat.png", style="width:20%;"),
+                                tags$img(src="./ingredient_raw_meat.png", style="width:20%;"),
+                                tags$img(src="./ingredient_raw_meat.png", style="width:20%;")
                             ))
                 )
            ))
