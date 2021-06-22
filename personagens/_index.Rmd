@@ -1,0 +1,241 @@
+---
+title: Personagens
+author: 'Paimon'
+date: '2021-06-21'
+slug: []
+categories: []
+tags: []
+disableReadmoreNav: true
+disable_comments: false
+draft: false
+---
+
+<style>
+body::-webkit-scrollbar {
+  width: 5px;               /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;        /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: transparent;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid #cccccc;  /* creates padding around scroll thumb */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  border: 3px solid #9e9e9e;  /* creates padding around scroll thumb */
+}
+</style>
+
+
+<style>
+/* Custom Scrollbar using CSS */
+.custom-scrollbar-css {
+  overflow-y: scroll;
+}
+
+/* scrollbar width */
+.custom-scrollbar-css::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* scrollbar track */
+.custom-scrollbar-css::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* scrollbar handle */
+.custom-scrollbar-css::-webkit-scrollbar-thumb {
+  border-radius: 2rem;
+  background-color: #cccccc;
+}
+
+.custom-scrollbar-css::-webkit-scrollbar-thumb:hover {
+  border: 3px solid #9e9e9e;  /* creates padding around scroll thumb */
+}
+</style>
+
+
+
+
+
+```{r bibliotecas_sources, echo=FALSE, warning=FALSE, message=FALSE}
+# Carregando os packages que serão usados.
+library(magrittr)
+library(kableExtra)
+library(shiny)
+library(tidyverse)
+
+# Definindo o path das imagens.
+#path <- "/"
+path <- "https://andersonuyekita.github.io/ge_database"
+
+# Os endereços foram obtidos a partir do list.files() 
+base::source(file = "../../R/personagens_back_end.R", encoding = "UTF-8")
+base::source(file = "../../R/personagens_front_end.R", encoding = "UTF-8")
+```
+
+```{r carousel_intro, echo=FALSE, warning=FALSE, message=FALSE}
+# Carousel das Cidades de Mondstadt e Liyue
+carousel_wrapper()
+
+# Texto explanatório.
+lead_wrapper(message = "Os personagens jogáveis foram divididos em nações apenas para organização.")
+```
+
+```{r acesso_bd, echo=FALSE, warning=FALSE, message=FALSE}
+# Acessa o Banco de Dados.
+airtable_GET(base = "stats",
+             table = "char") -> char_df
+
+# Subsetting 
+char_df$records.fields %>%
+  select(name, vision, nation, weapon_type) %>%
+  arrange(desc(nation), name) ->
+  char_df_tidy
+```
+
+```{r exemplo2, echo=FALSE, warning=FALSE, message=FALSE}
+
+gera_cod <- function(city, char_by_city) {
+    
+    # Inicialização da variável
+    div_card_list <- list()
+    
+    # Loop para criar os links de acordo com a quantidade de personagens.
+    for (i in char_by_city) {
+        
+        # Cria uma tagList de HTML.
+        tagList(
+            tags$div(class="col mb-4",
+                tags$div(class="card h-100",
+                    tags$div(class="container-fluid no-padding",
+                             style=paste0("background-image: url('../personagens/index/", city,"_avatar_bg.png');"),
+                             style="background-repeat: no-repeat;
+                                    background-size: cover;
+                                    background-position: center center;
+                                    width: 100%;",
+                             
+                             tags$a(href=sprintf("../personagens/%s", i),
+                                tags$div(style="text-align: center;", 
+                                         tags$img(
+                                           style=sprintf("content:url('../personagens/index/avatares/%s_avatar_%s.png')", city, i)
+                                                  )
+                                         )
+                                )
+                             ),
+                    tags$div(class="container-fluid",
+                             style="padding:0",
+                        tags$div(class="container-fluid card-body",
+                                 style="padding-left:0; padding-right:0;",
+                        tags$h5(class="genshin_font",
+                                style="text-align: center",
+                                
+                                # Nome do personagem
+                                stringr::str_to_title(string = i),
+                                
+                                # Rating
+                                tags$i(class="fa fa-star", style="color: #FFDF00", `aria-hidden`="true")),
+                        
+                        tags$div(class="container-fluid",
+                            tags$div(class="row",
+                                     
+                                # Elemento do personagem
+                                tags$div(class="col-6",
+                                    elemental_icon(vision = char_df_tidy %>% filter(name == i) %>% select(vision))
+                                    ),
+                                
+                                # Weapon
+                                tags$div(class="col-6",
+                                    weapon_icon(weapon_type = char_df_tidy %>%
+                                                    filter(name == i) %>%
+                                                    select(weapon_type) %>%
+                                                    as.character())
+                                    )
+                                )
+                            )
+                        )
+)
+                    )
+                )
+            ) -> codigo
+        
+        # Cria a lista de HTML.
+        div_card_list <- append(div_card_list, codigo)
+    }
+    
+    # Retorno da função.
+    return(div_card_list)
+}
+```
+
+<a name="chars_mondstadt"><h2 class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Mondstadt</h2></a>
+
+Atualmente a nação de Mondstadt possui `r char_df$records.fields %>% filter(nation == "mondstadt") %>% nrow()` personagens jogáveis. Sendo `r char_df$records.fields %>% filter(nation == "mondstadt") %>% filter(gender == "male") %>% nrow()` homens e `r char_df$records.fields %>% filter(nation == "mondstadt") %>% filter(gender == "female") %>% nrow()` mulheres.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# 
+tagAppendChild(
+    tags$div(
+        class="row row-cols-1 row-cols-md-4"),
+    tagList(gera_cod(city = "mon",
+                     char_by_city = char_df_tidy %>%
+                       filter(nation == "mondstadt") %>%
+                       select(name) %>%
+                       as.matrix())))
+```
+
+<a name="chars_liyue"><h2 class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Porto de Liyue</h2></a>
+
+Atualmente a nação de Liyue possui `r char_df$records.fields %>% filter(nation == "liyue") %>% nrow()` personagens jogáveis. Sendo `r char_df$records.fields %>% filter(nation == "liyue") %>% filter(gender == "male") %>% nrow()` homens e `r char_df$records.fields %>% filter(nation == "liyue") %>% filter(gender == "female") %>% nrow()` mulheres.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# 
+tagAppendChild(
+    tags$div(
+        class="row row-cols-1 row-cols-md-4"),
+    tagList(gera_cod(city = "liy",
+                     char_by_city = char_df_tidy %>%
+                       filter(nation == "liyue") %>%
+                       select(name) %>%
+                       as.matrix())))
+```
+
+<a name="chars_snezhnayan"><h2 class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Outras nações</h2></a>
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# 
+tagAppendChild(
+    tags$div(
+        class="row row-cols-1 row-cols-md-4"),
+    tagList(gera_cod(city = "sne",
+                     char_by_city = char_df_tidy %>%
+                       filter(!(nation %in% c("mondstadt", "liyue", "NA"))) %>%
+                       select(name) %>%
+                       as.matrix())))
+```
+
+```{r creating_toc, echo=FALSE}
+# Criação da sequência do TOC.
+'<nav id="TableOfContents">
+<ul>
+   <li>Nações</li>
+   <ul>
+      <li><a href="#chars_mondstadt">Mondstadt</a></li>
+      <li><a href="#chars_liyue">Porto de Liyue</a></li>
+      <li><a href="#chars_snezhnayan">Outras nações</a></li>   
+   </ul>
+</ul>
+</nav>' -> toc_in_text
+
+# É necessário retirar todos os espaços em brancos: Return Carriage e Nova linhas.
+# Se não fizer isso dá problema na exibição do HTML no TOC.
+toc_in_text <- gsub("[\r\n]", "", toc_in_text)
+
+# Atualiza o TOC
+# JS Script utilizado para atualizar a DIV docs-toc
+tags$script(HTML(sprintf("document.getElementsByClassName('docs-toc')[0].innerHTML = '%s';", toc_in_text)))
+```

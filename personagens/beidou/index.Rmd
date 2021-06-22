@@ -1,0 +1,126 @@
+---
+title: Beidou
+author: TESTER
+date: 'NULL'
+slug: ''
+categories: []
+tags:
+  - beidou
+disableReadmoreNav: yes
+---
+
+
+```{r libraries_sources, echo=FALSE, warning=FALSE, message=FALSE}
+
+# Carregando os packages que serão usados.
+library(magrittr)
+library(kableExtra)
+library(shiny)
+library(tidyverse)
+library(ggplot2)
+library(ggplotify)
+library(plotly)
+
+# Scripts
+base::source(file = "../../../R/personagens_back_end.R", encoding = "UTF-8")
+base::source(file = "../../../R/personagens_front_end.R", encoding = "UTF-8")
+
+# Personagem
+personagem <- tail(strsplit(getwd(), "/")[[1]], n = 1)
+
+```
+
+```{r acesso_db, echo=FALSE, warning=FALSE, message=FALSE}
+
+# Acesso ao Banco de Dados do Airtable.
+# Tabela stats
+airtable_GET(base="stats",
+             table = "stats",
+             filter = paste0("?filterByFormula=name%3D%22", personagem,"%22")) -> stats
+
+# Acesso ao Banco de Dados do Airtable.
+# Tabela char
+airtable_GET(base = "stats",
+             table = "char") -> char_table
+```
+
+```{r ficha_tecnica, echo=FALSE, warning=FALSE, message=FALSE}
+# Ficha Técnica
+ficha_tecnica_front(name_ = personagem, df_char_table = char_table)
+```
+
+<a name="atributos"><h2 style="padding-top: 60px; margin-top: -60px;" class="genshin_font">Atributos</h2></a>
+
+```{r, echo=FALSE}
+tags$button(type="button",
+            class="btn btn-primary",
+            `data-toggle`="modal",
+            `data-target`="#exampleModal",
+            "Detalhes")
+```
+
+```{r, echo=FALSE}
+tags$div(class="modal fade",
+         id="exampleModal",
+         `data-keyboard`="false",
+         tabindex="-1",
+         `aria-labelledby`="staticBackdropLabel",
+         `aria-hidden`="true",
+    tags$div(class="modal-dialog modal-xl modal-dialog-centered",
+        tags$div(class="modal-content",
+            tags$div(class="modal-header",
+                tags$h5(class="modal-title",
+                        id="staticBackdropLabel",
+                        "Modal title"),
+                tags$button(type="button",
+                            class="close",
+                            `data-dismiss`="modal",
+                            `aria-label`="Close",
+                    tags$span(`aria-hidden`="true",
+                              HTML("&times;"))
+                )
+            ),
+            tags$div(class="modal-body",
+                tags$iframe(class="flexdashboard",
+                            src=sprintf("./flexdashboard_%s.html", personagem),
+                            style="width:100%; height:95vh;")
+                ),
+            tags$div(class="modal-footer",
+                tags$button(type="button",
+                            class="btn btn-secondary",
+                            `data-dismiss`="modal",
+                            "Close"),
+                tags$button(type="button",
+                            class="btn btn-primary",
+                            "Understood"))
+        )
+    )
+)
+```
+
+<a name="talentos"><h2 style="padding-top: 60px; margin-top: -60px;" class="genshin_font">Talentos</h2></a>
+
+
+<a name="constelacao"><h2 style="padding-top: 60px; margin-top: -60px;" class="genshin_font">Constelação</h2></a>
+
+
+
+```{r creating_toc, echo=FALSE}
+# Criação da sequência do TOC.
+'<nav id="TableOfContents">
+<ul>
+   <li><a href="#top">Ficha Técnica</a></li>
+   <li><a href="#atributos">Atributos</a></li>
+   <li><a href="#talentos">Talentos</a></li>
+   <li><a href="#historia">História</a></li>
+</ul>
+</nav>' -> toc_in_text
+
+# É necessário retirar todos os espaços em brancos: Return Carriage e Nova linhas.
+# Se não fizer isso dá problema na exibição do HTML no TOC.
+toc_in_text <- gsub("[\r\n]", "", toc_in_text)
+
+# Atualiza o TOC
+# JS Script utilizado para atualizar a DIV docs-toc
+tags$script(HTML(sprintf("document.getElementsByClassName('docs-toc')[0].innerHTML = '%s';", toc_in_text)))
+```

@@ -1,0 +1,317 @@
+---
+title: "Sucrose"
+author: "Traveler"
+date: '2021-06-01'
+slug: []
+tags: []
+categories: []
+toc: true
+draft: false
+disableReadmoreNav: true
+---
+
+```{r libraries_sources, echo=FALSE, warning=FALSE, message=FALSE}
+
+# Carregando os packages que serão usados.
+library(magrittr)
+library(kableExtra)
+library(shiny)
+library(tidyverse)
+library(ggplot2)
+library(ggplotify)
+library(plotly)
+
+# Scripts
+base::source(file = "../../../R/personagens_back_end.R", encoding = "UTF-8")
+base::source(file = "../../../R/personagens_front_end.R", encoding = "UTF-8")
+
+# Personagem
+personagem <- "sucrose"
+
+```
+
+
+```{r acesso_db, echo=FALSE, warning=FALSE, message=FALSE}
+
+# Acesso ao Banco de Dados do Airtable.
+# Tabela stats
+airtable_GET(base="stats",
+             table = "stats",
+             filter = paste0("?filterByFormula=name%3D%22", personagem,"%22")) -> stats
+
+# Acesso ao Banco de Dados do Airtable.
+# Tabela char
+airtable_GET(base = "stats",
+             table = "char") -> char_table
+```
+
+
+<style>
+
+.bullet_ge {
+  background: url('bullets_1.svg');
+  height: 50px;
+  width: 50px;
+  display: block;
+}
+</style>
+
+<style>
+.info_box {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+}
+.info_box-primary {
+    border-color: #337ab7;
+}
+.info_box-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.info_box-primary>.info_box-heading {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.info_box-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: inherit;
+}
+
+.info_box-body {
+    padding: 15px;
+}
+</style>
+
+```{r ficha_tecnica, echo=FALSE, warning=FALSE, message=FALSE}
+# Ficha Técnica
+ficha_tecnica_front(name_ = "sucrose", df_char_table = char_table)
+```
+
+<br>
+
+<a name="atributos"><h2 style="padding-top: 60px; margin-top: -60px;" class="genshin_font">Atributos</h2></a>
+
+A cada level a personagem ganha de modo geral 64 de HP, 1.2 de ATK e 4.9 de DEF.
+
+```{r atributos, echo=FALSE, warning=FALSE, message=FALSE}
+
+talents_wrapper(
+    txt_combat = tagList(
+        tags$div(class="container-fluid no-padding",
+            tags$div(class="row",
+                  grafico(name_ = "sucrose",
+                          atributo_ = "atk",
+                          df_stats = stats)
+                  )
+            )      
+    ),
+    txt_passive = HTML(
+    stats$records.fields %>%
+    filter(lvl %in% c(1,20,40,50,60,70,80,90)) %>%
+    arrange(ascension_lvl, lvl) %>%
+    select(ascension_lvl, lvl, hp, atk, def, bonus) %>%
+    kableExtra::kbl() %>%
+    kableExtra::kable_styling(
+        bootstrap_options = c("hover",
+                              "striped",
+                              "condensed")
+    )
+    ))
+```
+
+```{r atributos2, echo=FALSE, warning=FALSE, message=FALSE}
+
+tags$div(class="container-fluid no-padding",
+    tags$div(class="row",
+        tags$div(class="w-50 p-3",
+            tags$div(class="alert alert-primary", role="alert",
+                tags$h4("Content 1"),
+                tags$p("Text of Content 1"))),
+        tags$div(class="w-50 p-3",
+            grafico(name_ = "sucrose", atributo_ = "atk", df_stats = stats))
+        )
+    )
+```
+
+```{r tipo_ataque, echo=FALSE, warning=FALSE, message=FALSE}
+
+airtable_GET(base = "talents", table = "atk") -> atk_tipo
+    
+    # Faz o subset filtrando pelo personagem escolhido (name_) e elimina colunas não necessárias.
+    atk_tipo$records.fields %>%
+        dplyr::filter(name == "sucrose") %>%
+        dplyr::select(-c(id,              # Remove as colunas: id, name, description_en e descriotion_pt
+                         name)) -> atk_tipo_df_subset
+
+```
+
+<a name="talentos"><h2 style="padding-top: 60px; margin-top: -60px;" class="genshin_font">Talentos</h2></a>
+
+```{r talentos, echo=FALSE, warning=FALSE, message=FALSE}
+
+combate_html <- tagList(
+    tags$div(class="container-fluid",
+        tags$div(class="row",
+            tags$div(class="col-sm",
+                tags$h6(class="genshin_font","Normal"),
+                tags$img(style="content:url('../sucrose/talent_sucrose_1.png'); width:80%;")
+                ),
+            tags$div(class="col-sm",
+                tags$h6(class="genshin_font","Skill"),
+                tags$img(style="content:url('../sucrose/talent_sucrose_2.png'); width:80%;")
+                ),
+            tags$div(class="col-sm",
+                tags$h6(class="genshin_font","Burst"),
+                tags$img(style="content:url('../sucrose/talent_sucrose_3.png'); width:80%;")
+                )
+            )
+        )
+    )
+
+
+passivo_html <- tagList(
+    tags$div(class="container",
+        tags$div(class="row",
+            tags$div(class="col-sm",
+                "icon_1"),
+            tags$div(class="col-sm",
+                "icon_2"),
+            tags$div(class="col-sm",
+                "icon_3"))))
+
+
+
+tags$div(class="container",
+    tags$div(class="row",
+        tags$div(class="w-50 p-1",
+            tags$div(class="info_box info_box-primary",
+                tags$div(class="info_box-heading",
+                    tags$h4(class="info_box-title",
+                        style="text-align: center;",
+                        "Combate")),
+                tags$div(class="info_box-body", style="text-align:center",
+                    combate_html))),
+        tags$div(class="w-50 p-1",
+            tags$div(class="info_box info_box-primary",
+                tags$div(class="info_box-heading",
+                    tags$h4(class="info_box-title",
+                        style="text-align: center;",
+                        "Passivo")),
+                tags$div(class="info_box-body",
+                    passivo_html)))
+    )
+)
+```
+
+```{r, echo=FALSE, warning=FALSE}
+
+talents_wrapper(
+    txt_combat = tagList(
+        panel_wrapper(tipo = "primary",
+                      header = "Criação do Espírito do Vento",
+                      body = "OI"),
+        panel_wrapper(tipo = "danger",
+                      header = "criação do espírito do vento: experimento 6308",
+                      body = "media_wrapper_2()"),
+        panel_wrapper(tipo = "warning",
+                      header = "criação do espírito do vento proibido: Isomorfismo tipo 75-II",
+                      body = "media_wrapper_2()")
+        ),
+    txt_passive = "OI")
+```
+
+<a name="constelacao"><h2 style="padding-top: 60px; margin-top: -60px;" class="genshin_font">Constelação</h2></a>
+
+Aenean et dui et quam consectetur egestas ut et nibh. Donec congue aliquam mi ut rhoncus. Nullam efficitur ipsum at ligula pellentesque, sit amet venenatis nulla volutpat. Ut vitae placerat quam, dictum vestibulum nulla. In sed lacus non turpis fringilla bibendum. Etiam congue pretium tempus. Aliquam blandit imperdiet quam, at auctor mauris congue blandit. Mauris eget dignissim orci, sit amet hendrerit est. Nunc turpis dolor, porttitor et sapien in, vulputate porta quam. Etiam suscipit eget neque ac lacinia. Sed rhoncus eros sit amet finibus imperdiet. Proin a ipsum at tortor placerat lacinia et sit amet leo.
+
+```{r tags, echo=FALSE, warning=FALSE}
+library(shiny)
+tags$p(class="lead" ,"OI OI SOAIJSOADJOIASJDIOSJD")
+```
+
+```{r}
+tags$span(class="bullet_ge")
+```
+
+```{r creating_toc, echo=FALSE}
+# Criação da sequência do TOC.
+'<nav id="TableOfContents">
+<ul>
+   <li><a href="#top">Ficha Técnica</a></li>
+   <li><a href="#ataques">Ataques</a></li>
+   <li><a href="#atributos">Atributos</a></li>
+   <li><a href="#talentos">Talentos</a></li>
+   <li><a href="#historia">História</a></li>
+</ul>
+</nav>' -> toc_in_text
+
+# É necessário retirar todos os espaços em brancos: Return Carriage e Nova linhas.
+# Se não fizer isso dá problema na exibição do HTML no TOC.
+toc_in_text <- gsub("[\r\n]", "", toc_in_text)
+
+# Atualiza o TOC
+# JS Script utilizado para atualizar a DIV docs-toc
+tags$script(HTML(sprintf("document.getElementsByClassName('docs-toc')[0].innerHTML = '%s';", toc_in_text)))
+```
+
+
+
+<br>
+
+
+```{r, echo=FALSE}
+tags$button(type="button",
+            class="btn btn-primary",
+            `data-toggle`="modal",
+            `data-target`="#exampleModal",
+            "Detalhes")
+```
+
+```{r, echo=FALSE}
+tags$div(class="modal fade",
+         id="exampleModal",
+         `data-keyboard`="false",
+         tabindex="-1",
+         `aria-labelledby`="staticBackdropLabel",
+         `aria-hidden`="true",
+    tags$div(class="modal-dialog modal-xl modal-dialog-centered",
+        tags$div(class="modal-content",
+            tags$div(class="modal-header",
+                tags$h5(class="modal-title",
+                        id="staticBackdropLabel",
+                        "Modal title"),
+                tags$button(type="button",
+                            class="close",
+                            `data-dismiss`="modal",
+                            `aria-label`="Close",
+                    tags$span(`aria-hidden`="true",
+                              HTML("&times;"))
+                )
+            ),
+            tags$div(class="modal-body",
+                tags$iframe(class="flexdashboard",
+                            src=sprintf("./flexdashboard_%s.html", personagem),
+                            style="width:100%; height:95vh;")
+                ),
+            tags$div(class="modal-footer",
+                tags$button(type="button",
+                            class="btn btn-secondary",
+                            `data-dismiss`="modal",
+                            "Close"),
+                tags$button(type="button",
+                            class="btn btn-primary",
+                            "Understood"))
+        )
+    )
+)
+```
