@@ -13,6 +13,7 @@
         font-family: "genshin";
     }
     </style>
+    
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,19 +36,14 @@
 
     
     
-        
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'G-LQ3YV9WGY4', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LQ3YV9WGY4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
     
+      gtag('config', 'G-LQ3YV9WGY4');
+    </script>
 
 </head>
 <body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
@@ -77,7 +73,7 @@ if (!doNotTrack) {
 <div class="container-fluid">
             <div class="row">
 
-                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right custom-scrollbar-css" style="top:5rem; height:calc(100vh - 15rem);"><nav class="navbar navbar-expand-md navbar-light pl-0">
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right custom-scrollbar-css" style="top:5rem; height:calc(100vh - 5rem);"><nav class="navbar navbar-expand-md navbar-light pl-0">
     <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -318,7 +314,7 @@ if (!doNotTrack) {
 
 
 </div>
-                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left" style="padding-top:0px; top:5rem; height:calc(100vh - 15rem);"><div class="docs-toc">
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left" style="padding-top:0px; top:5rem; height:calc(100vh - 5rem);"><div class="docs-toc">
 	
 </div>
 </div>
@@ -328,10 +324,8 @@ if (!doNotTrack) {
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
+<p><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script></p>
+<script type="text/javascript">
 $(document).ready(function(){
   $('[data-toggle="popover-hover"]').popover({
       html: true,
@@ -355,6 +349,20 @@ O processamento de alimentos é necessário para a
 </span>
 </em>
 </p>
+<div class="alert alert-primary" role="alert">
+<h4 id="resumo" class="genshin_font" style="padding-top: 90px; margin-top: -90px;">Resumo</h4>
+<ul>
+<li>O processamento de alimentos pode ser realizado nas fogueiras e nos fogões;</li>
+<li>12 ingredientes podem ser processados a partir de outros ingredientes;</li>
+<li>
+Não é possível 
+<code>cancelar</code>
+o processamento, uma vez que você já tenha iniciado;
+</li>
+<li>Lembre-se de acender a fogueira, e;</li>
+<li>A fila de processamento é de 99 itens.</li>
+</ul>
+</div>
 <p>Atualmente a função <code>processar</code> presente na função <code>culinária</code> pode gerar 12 novos ingredientes, das quais serão utilizados na elaboração de outros pratos.</p>
 <div class="alert alert-warning" role="alert">
 <div class="container-fluid" style="padding: 0; margin: 0;">
@@ -374,7 +382,10 @@ O processamento de alimentos
 </div>
 </div>
 </div>
-<p>A tabela abaixo apresenta um resumo do ingrediente.</p>
+<h5 id="processos" class="genshin_font" style="padding-top: 90px; margin-top: -90px;">
+Tabela de Processos de Ingredientes
+</h5>
+<p>A tabela abaixo apresenta um resumo para a produção do produto desejado e a sua respectiva quantidade de ingredientes.</p>
 <table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto; table-layout: fixed;">
 <thead>
 <tr>
@@ -606,6 +617,9 @@ O processamento de alimentos
 </tr>
 </tbody>
 </table>
+<h5 id="queue" class="genshin_font" style="padding-top: 90px; margin-top: -90px;">
+Fila de Processamento
+</h5>
 <p>O <code>processamento</code> possui uma fila de execução de trabalhos de até <strong>99 slots</strong>, onde cada ingrediente será produzido de maneira unitária.</p>
 <div class="alert alert-warning" role="alert">
 <div class="container-fluid" style="padding: 0; margin: 0;">
@@ -625,6 +639,7 @@ o processamento de ingredientes.
 </div>
 </div>
 </div>
+<p><script>document.getElementsByClassName('docs-toc')[0].innerHTML = '<nav id="TableOfContents"><ul>   <li><a href="#resumo">Resumo</a></li>   <ul>      <li><a href="#processos">Tabela de Processos</a></li>      <li><a href="#queue">Fila de Processamento</a></li>   </ul></ul></nav>';</script></p>
 
 
     
@@ -658,15 +673,70 @@ o processamento de ingredientes.
 
         </div> 
 
-        </div><div class="container-fluid" style="background-image: linear-gradient(white, 50%, transparent), url(../footer_bg.png); background-size: cover; background-position: center center;">
+        </div><div class="container-fluid" style="background-image: linear-gradient(white, 50%, transparent), url(https://db.genshinimpactbr.com.br//footer_bg.png); background-size: cover; background-position: center center;">
     <footer class="container py-5">
+        
         <div class="row">
-            <div class="col-12 col-md">
-                <span style="text-align: center!important; font-size: 0.8rem;">
-                <p style="margin-bottom: 0rem!important">Esse site <strong>não é afiliado ou associado</strong> à MiHoYo. Todas as imagens foram geradas em sessões de jogos ou obtidas na internet sob a licença <code>CC BY-SA</code>.</p>
-                <p style="margin-bottom: 0rem!important">Copyright © 2021 by Genshin Impact BR. All rights reserved.</p>
+            <div class="col align-self-center">
+                <span style="text-align: center!important; font-size: 0.8rem; display: block;">
+                    Esse site <strong>não é afiliado ou associado</strong> à MiHoYo. Todas as imagens foram geradas em sessões de jogos ou obtidas na internet sob a licença <code>CC BY-SA</code>.
+                    <br>
+                    Copyright © 2021 by Genshin Impact BR. All rights reserved.
                 </span>
             </div>
+        </div>
+        
+        <hr>
+        
+        <div class="row">
+            
+            <div class="col align-self-center">
+                <span style="text-align: center!important; font-size: 0.8rem; display: block;">
+                    IDE e Packages usados
+                    <br><br>
+                </span>
+                <span style="text-align: center!important; font-size: 0.8rem; display: block;">
+                    <a href="https://www.rstudio.com"  class="footer-links-kudos" rel="noopener noreferrer" target="_blank">
+                        <img src="https://db.genshinimpactbr.com.br//rstudio_logo.svg" height="31">
+                    </a>
+                </span>
+                <span style="text-align: center!important; font-size: 0.8rem; display: block;">
+                    <a href="https://bookdown.org/yihui/blogdown/"  class="footer-links-kudos" rel="noopener noreferrer" target="_blank">
+                        <img src="https://db.genshinimpactbr.com.br//r_blogdown.png" height="31">
+                    </a>
+                </span>                
+                
+            </div>
+            
+            <div class="col align-self-center">
+                <span style="text-align: center!important; font-size: 0.8rem; display: block;">
+                    Este obra está licenciado com uma Licença:
+                    <br>
+                    <a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="noopener noreferrer" target="_blank">
+                        <img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png">
+                        <br>
+                    </a>
+                    Creative Commons Atribuição-Compartilha Igual 4.0 Internacional
+                </span>
+            </div>
+            
+            <div class="col align-self-center">
+                <span style="text-align: center!important; font-size: 0.8rem; display: block;">
+                    <a href="https://gohugo.io/" class="footer-links-kudos" rel="noopener noreferrer" target="_blank">
+                        Made with
+                        <img src="https://db.genshinimpactbr.com.br//hugo-logo.png" width="31" height="31">
+                        <br>
+                        <br>
+                    </a>
+                    <a href="https://vantage-design.com" class="footer-links-kudos" rel="noopener noreferrer" target="_blank">
+                        Tema: Ace documentation
+                        <br>
+                        <img src="https://db.genshinimpactbr.com.br//vantage_design_logo.png" height="31">
+                    </a>
+                    
+                </span>
+            </div>
+
         </div>
     </footer>
 </div>

@@ -113,7 +113,7 @@ tags$p(class="lead",
        tags$em("A função", tags$strong("culinária"), "é utilizada para a criação de itens consumíveis. Ela pode ser habilitada todas as vezes que um personagem jogável se aproxima de uma fogueira acesa (e munida de uma panela) ou de fogões localizadas nas cidades."))
 ```
 
-```{r lead}
+```{r resumo}
 tags$div(class="alert alert-primary",
          role="alert",
          tags$h4("Resumo"),

@@ -9,21 +9,6 @@ disableReadmoreNav: true
 disable_comments: false
 weight: 2
 ---
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<script>
-$(document).ready(function(){
-  $('[data-toggle="popover-hover"]').popover({
-      html: true,
-      trigger: 'hover',
-      placement: 'top',
-    });   
-});
-</script>
-
-
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(shiny)
@@ -31,7 +16,11 @@ library(magrittr)
 library(kableExtra)
 library(tidyverse)
 
-knitr::opts_chunk$set(echo=FALSE,message=FALSE,warning=FALSE)
+knitr::opts_chunk$set(echo=FALSE,message=FALSE,warning=FALSE,collapse=TRUE)
+
+tags$script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+tags$script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js")
+tags$script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
 
 # QUantidades de pasta para "voltar" até database.
 #tail(str_split(string = dirname(rstudioapi::getSourceEditorContext()$path), pattern = "/")[[1]], -5)
@@ -44,11 +33,20 @@ knitr::opts_chunk$set(echo=FALSE,message=FALSE,warning=FALSE)
 # Scripts
 base::source(file = "../../../R/personagens_back_end.R", encoding = "UTF-8")
 base::source(file = "../../../R/personagens_front_end.R", encoding = "UTF-8")
-source("../../../R/consumiveis.R", encoding = "UTF-8")
+base::source(file = "../../../R/consumiveis.R", encoding = "UTF-8")
 ```
 
+```{js popover-script}
+$(document).ready(function(){
+  $('[data-toggle="popover-hover"]').popover({
+      html: true,
+      trigger: 'hover',
+      placement: 'top',
+    });   
+});
+```
 
-```{r}
+```{r imagem}
 tags$div(class="card bg-dark text-white",
          style="margin-bottom: 1rem;",
     tags$img(src="./bg.png",
@@ -70,6 +68,23 @@ lead_wrapper(
 )
 ```
 
+```{r resumo}
+tags$div(class="alert alert-primary",
+         role="alert",
+         tags$h4(id="resumo",
+                 class="genshin_font",
+                 style="padding-top: 90px; margin-top: -90px;",
+                 "Resumo"),
+         tags$ul(
+             tags$li("O processamento de alimentos pode ser realizado nas fogueiras e nos fogões;"),
+             tags$li("12 ingredientes podem ser processados a partir de outros ingredientes;"),
+             tags$li("Não é possível ", tags$code("cancelar"), "o processamento, uma vez que você já tenha iniciado;"),
+             tags$li("Lembre-se de acender a fogueira, e;"),
+             tags$li("A fila de processamento é de 99 itens."),
+             )
+         )
+```
+
 Atualmente a função `processar` presente na função `culinária` pode gerar 12 novos ingredientes, das quais serão utilizados na elaboração de outros pratos.
 
 ```{r alert-warning-duration}
@@ -84,9 +99,11 @@ alert_icon(type = "warning",
            )
 ```
 
-A tabela abaixo apresenta um resumo do ingrediente.
+<h5 id="processos" class="genshin_font" style="padding-top: 90px; margin-top: -90px;">Tabela de Processos de Ingredientes</h5>
 
-```{r}
+A tabela abaixo apresenta um resumo para a produção do produto desejado e a sua respectiva quantidade de ingredientes. 
+
+```{r table-ingredients}
 
 tags$table(class="table table-striped table-hover",
            style="margin-left: auto; margin-right: auto; table-layout: fixed;",
@@ -268,6 +285,7 @@ tags$table(class="table table-striped table-hover",
            ))
 ```
 
+<h5 id="queue" class="genshin_font" style="padding-top: 90px; margin-top: -90px;">Fila de Processamento</h5>
 
 O `processamento` possui uma fila de execução de trabalhos de até **99 slots**, onde cada ingrediente será produzido de maneira unitária.
 
@@ -281,4 +299,25 @@ alert_icon(type = "warning",
                   "o processamento de ingredientes."
               ))
            )
+```
+
+```{r creating-toc}
+# Criação da sequência do TOC.
+'<nav id="TableOfContents">
+<ul>
+   <li><a href="#resumo">Resumo</a></li>
+   <ul>
+      <li><a href="#processos">Tabela de Processos</a></li>
+      <li><a href="#queue">Fila de Processamento</a></li>
+   </ul>
+</ul>
+</nav>' -> toc_in_text
+
+# É necessário retirar todos os espaços em brancos: Return Carriage e Nova linhas.
+# Se não fizer isso dá problema na exibição do HTML no TOC.
+toc_in_text <- gsub("[\r\n]", "", toc_in_text)
+
+# Atualiza o TOC
+# JS Script utilizado para atualizar a DIV docs-toc
+tags$script(HTML(sprintf("document.getElementsByClassName('docs-toc')[0].innerHTML = '%s';", toc_in_text)))
 ```

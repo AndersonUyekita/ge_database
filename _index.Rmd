@@ -1,10 +1,12 @@
 ---
+title: Início
 description: ""
+toc: false
 disableReadmoreNav: true
 disable_comments: true
 ---
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r loading-pkgs,echo=FALSE,warning=FALSE,message=FALSE}
 # Carregando os packages que serão usados.
 library(magrittr)
 library(kableExtra)
@@ -22,7 +24,7 @@ base::source(file = "../R/personagens_back_end.R", encoding = "UTF-8")
 base::source(file = "../R/personagens_front_end.R", encoding = "UTF-8")
 ```
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r hero}
 tags$div(class="container-fluid",
     tags$div(class="row",
              style="background-image: url('./bg.jpg');",
@@ -43,16 +45,16 @@ tags$div(class="container-fluid",
                     style="color: #1c1c22",
                     "Site em construção"),
                  tags$br(),
-                 tags$br()
-                 )
-        ))
+                 tags$br())
+        )
+    )
 ```
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r lead}
 lead_wrapper(message = "Esse site é um exercício de programação. Muitos dos dados foram obtidos diretamente na internet.")
 ```
 
-```{r}
+```{r twitter}
 tags$div(class="container-fluid",
     tags$div(class="row",
         tags$div(class="col-6",
@@ -68,17 +70,4 @@ tags$div(class="container-fluid",
             tags$h4("Mapa"))
         )
     )
-```
-
-```{r creating_toc, echo=FALSE}
-# Criação da sequência do TOC.
-'' -> toc_in_text
-
-# É necessário retirar todos os espaços em brancos: Return Carriage e Nova linhas.
-# Se não fizer isso dá problema na exibição do HTML no TOC.
-toc_in_text <- gsub("[\r\n]", "", toc_in_text)
-
-# Atualiza o TOC
-# JS Script utilizado para atualizar a DIV docs-toc
-tags$script(HTML(sprintf("document.getElementsByClassName('docs-toc')[0].innerHTML = '%s';", toc_in_text)))
 ```
