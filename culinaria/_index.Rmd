@@ -5,10 +5,20 @@ date: '2021-06-17'
 slug: []
 categories: []
 tags: []
-weight: 1
 disableReadmoreNav: true
 disable_comments: false
+weight: 1
 ---
+
+<style>
+
+kbd .ameno {
+    padding: .1rem .3rem;
+    background-color: #32d7a0;
+    color: #1c1c22;
+}
+
+</style>
 
 <style>
 
@@ -36,8 +46,11 @@ library(tidyverse)
 
 knitr::opts_chunk$set(echo=FALSE,message=FALSE,warning=FALSE)
 
+# Configuração do path para este específico chunk.
+setwd("C:/Users/andersonuyekita/Documents/GE_BR/database/")
 
-source("../../R/consumiveis.R", encoding = "UTF-8")
+source("./R/consumiveis.R", encoding = "UTF-8")
+source("./R/default.R", encoding = "UTF-8")
 ```
 
 ```{r carousel}
@@ -47,7 +60,7 @@ library(shiny)
 carousel_wrapper <- function() {
     tags$div(id="carouselExampleCaptions",
              class="carousel slide",
-             style="margin-bottom: 2.0rem;",
+             style="margin-bottom: 1.0rem;",
              `data-ride`="carousel",
              tags$ol(class="carousel-indicators",
                      tags$li(`data-target`="#carouselExampleCaptions",
@@ -62,28 +75,28 @@ carousel_wrapper <- function() {
                      ),
              tags$div(class="carousel-inner",
                       tags$div(class="carousel-item active",
-                               tags$img(style="content:url('../culinaria/liyue.png'); filter: brightness(0.6);",
+                               tags$img(style="content:url('../culinaria/liyue.png'); filter: brightness(0.6); border-radius: 0.25rem;",
                                         class="d-block w-100",
                                         alt="Imagem do Forno da Cidade de Mondstadt."),
                                tags$div(class="carousel-caption d-none d-md-block",
                                         tags$h1(class="genshin_font",
                                                 "Caçador de Cervos"))),
                       tags$div(class="carousel-item",
-                               tags$img(style="content:url('../culinaria/mondstadt.png'); filter: brightness(0.6);",
+                               tags$img(style="content:url('../culinaria/mondstadt.png'); filter: brightness(0.6); border-radius: 0.25rem;",
                                         class="d-block w-100",
                                         alt="Imagem do Forno da Cidade de Liyue."),
                                tags$div(class="carousel-caption d-none d-md-block",
                                         tags$h1(class="genshin_font",
                                                 "Restaurante de Wanmin"))),
                       tags$div(class="carousel-item",
-                               tags$img(style="content:url('../culinaria/albergue_wangshu.png'); filter: brightness(0.6);",
+                               tags$img(style="content:url('../culinaria/albergue_wangshu.png'); filter: brightness(0.6); border-radius: 0.25rem;",
                                         class="d-block w-100",
                                         alt="Imagem do Forno do Albergue de Wangshu."),
                                tags$div(class="carousel-caption d-none d-md-block",
                                         tags$h1(class="genshin_font",
                                                 "Albergue Wangshu"))),
                       tags$div(class="carousel-item",
-                               tags$img(style="content:url('../culinaria/mondstadt_externo.png'); filter: brightness(0.6);",
+                               tags$img(style="content:url('../culinaria/mondstadt_externo.png'); filter: brightness(0.6); border-radius: 0.25rem;",
                                         class="d-block w-100",
                                         alt="Imagem do Forno do lado externo da cidade de Mondstadt."),
                                tags$div(class="carousel-caption d-none d-md-block",
@@ -114,20 +127,19 @@ tags$p(class="lead",
 ```
 
 ```{r resumo}
-tags$div(class="alert alert-primary",
-         role="alert",
-         tags$h4("Resumo"),
-         tags$ul(
+resumo_wrapper(
+    lista = tags$ul(
+             tags$li("Aether e Lumine já começam com 9 pratos em seu portfólio de pratos."),
+             tags$li("Os pratos que não precisam de", tags$code("receita") , "possuem efeitos/atributos muito limitados."),
              tags$li("Antes de cozinhar você precisará obter a", tags$code("receita"), ";"),
              tags$li("Após você obter a", tags$code("receita"), "você terá que possuir os", tags$code("ingredientes"), ";"),
              tags$li("Lembre-se de acender a fogueira;"),
              tags$li("Atente-se até obter a proficiência, pois o desempenho na preparação afetará a qualidade do prato entre suspeito, normal e delicioso;"),
              tags$li("Escolha o Personagem (cozinheiro) que possua Bônus de produção ou possibilidade de obter Pratos Especiais.")
-             )
-         )
+             ))
 ```
 
-Poucos alimentos podem ser utilizados sem a necessidade de preparação, isto é, sem ter que usar a função de culinária. Os exemplos mais triviais são:
+Poucos alimentos podem ser utilizados sem a necessidade de preparação, isto é, sem ter que usar a função de `culinária`. Os exemplos mais triviais são:
 
 * Maçã, e;
 * Fruto do Pôr do Sol.
@@ -136,7 +148,7 @@ Ambos restauram míseros 300 de Vida. Portanto, eles só serão úteis para os p
 
 <h3 id="culinaria" class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Culinária</h3>
 
-Antes de cozinhar qualquer prato será necessário obter as `receitas`. Você poderá comprar as receitas de ranking menores nos NPC's localizados nas cidades de Mondstadt e Liyue, além de encontrá-las nos baús ou em outras interações com o jogo.
+Poucos pratos podem ser preparados sem a necessidade de aprender as receitas, antes de prepará-las. Caso queira preparar pratos com atributos mais robustos, terás que aprender a `receita` antes. Você poderá comprar as receitas de ranking menores nos NPC's localizados nas cidades de Mondstadt e Liyue, além de encontrá-las nos baús ou em outras interações com o jogo, tais como recompensas de uma missão.
 
 ```{r alert-culinaria}
 # WARNING ALERT do Nível de Preparação
@@ -409,7 +421,23 @@ alert_icon(type = "warning",
 
 <h5 id="autocozinhar" class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Autocozinhar</h5>
 
-A opção de `Autocozinhar` será desbloqueada somente após a obtenção da `proficiência`, essa opção possibilita a preparação de até 99 pratos de uma vez só. Cabe ressaltar que os bônus concedidos pelos `cozinheiros` continuam valendo para essa forma de cozinhar.
+A opção de `Autocozinhar` será desbloqueada somente após a obtenção da `proficiência`, essa opção possibilita a preparação de até **99 pratos** de uma vez só. Cabe ressaltar que os bônus concedidos pelos `cozinheiros` continuam valendo para essa forma de cozinhar.
+
+```{r carousel-autocook}
+carousel_n_images(
+      
+        # Definição de ID.
+        id = "carousel6",
+        
+        # Endereços das imagens.
+        url_list = list("../culinaria/6_1_autocook.png",
+                        "../culinaria/6_2_autocook.png"),
+        
+        # Alt de cada uma das imagens.
+        alt_list = list("Nível de preparação Concluído que resulta em pratos Esquisitos.",
+                        "Nível de preparação Sucesso que resulta em pratos Normais.")
+        )
+```
 
 ```{r alert-warning-autocook}
 # SUCCESS ALERT do Nível de Preparação
@@ -422,7 +450,6 @@ alert_icon(type = "warning",
               ))
            )
 ```
-
 
 ```{r alert-success-autocook}
 # SUCCESS ALERT do Nível de Preparação

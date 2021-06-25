@@ -1,5 +1,5 @@
 ---
-title: Processar
+title: "Processar"
 author: ''
 date: '2021-06-18'
 slug: []
@@ -18,22 +18,16 @@ library(tidyverse)
 
 knitr::opts_chunk$set(echo=FALSE,message=FALSE,warning=FALSE,collapse=TRUE)
 
-tags$script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
-tags$script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js")
-tags$script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
+# Habilitar para usar o popover
+#tags$script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+#tags$script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js")
+#tags$script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
 
-# QUantidades de pasta para "voltar" até database.
-#tail(str_split(string = dirname(rstudioapi::getSourceEditorContext()$path), pattern = "/")[[1]], -5)
-#j <- ""
-#
-#for (i in rep("../", 3)) {
-#    j <- paste0(j, i)
-#}
+# Configuração do path para este específico chunk.
+setwd("C:/Users/andersonuyekita/Documents/GE_BR/database/")
 
 # Scripts
-base::source(file = "../../../R/personagens_back_end.R", encoding = "UTF-8")
-base::source(file = "../../../R/personagens_front_end.R", encoding = "UTF-8")
-base::source(file = "../../../R/consumiveis.R", encoding = "UTF-8")
+base::source(file = "./R/default.R", encoding = "UTF-8")
 ```
 
 ```{js popover-script}
@@ -46,46 +40,41 @@ $(document).ready(function(){
 });
 ```
 
-```{r imagem}
-tags$div(class="card bg-dark text-white",
-         style="margin-bottom: 1rem;",
-    tags$img(src="./bg.png",
-        style="filter: brightness(0.6);"),
-    tags$div(class="card-img-overlay",
-             style="justify-content: center; display: flex; align-items: center; height: 100%;",
-             tags$h1(class="card-title genshin_font",
-                     "Processar")
-             )
-)
-```
+```{r hero}
 
-```{r lead}
-lead_wrapper(
-    message =
-        tags$span("O processamento de alimentos é necessário para a",
+hero_img(titulo = "Processar",
+         lead_message = tags$span("O processamento de alimentos é necessário para a",
     tags$strong("transformação"),
     " de ingredientes brutos em novos ingredientes.")
-)
+    )
 ```
 
 ```{r resumo}
-tags$div(class="alert alert-primary",
-         role="alert",
-         tags$h4(id="resumo",
-                 class="genshin_font",
-                 style="padding-top: 90px; margin-top: -90px;",
-                 "Resumo"),
-         tags$ul(
+
+resumo_wrapper(lista = tags$ul(
              tags$li("O processamento de alimentos pode ser realizado nas fogueiras e nos fogões;"),
              tags$li("12 ingredientes podem ser processados a partir de outros ingredientes;"),
              tags$li("Não é possível ", tags$code("cancelar"), "o processamento, uma vez que você já tenha iniciado;"),
-             tags$li("Lembre-se de acender a fogueira, e;"),
-             tags$li("A fila de processamento é de 99 itens."),
-             )
-         )
+             tags$li("A fila de processamento é de 99 itens para cada produto."),
+             ))
 ```
 
 Atualmente a função `processar` presente na função `culinária` pode gerar 12 novos ingredientes, das quais serão utilizados na elaboração de outros pratos.
+
+```{r}
+carousel_n_images(
+      
+        # Definição de ID.
+        id = "carousel1",
+        
+        # Endereços das imagens.
+        url_list = list("../culinaria/1_1_process.png"),
+        
+        # Alt de cada uma das imagens.
+        alt_list = list("Nível de preparação Concluído que resulta em pratos Esquisitos.")
+        )
+```
+
 
 ```{r alert-warning-duration}
 # SUCCESS ALERT do Nível de Preparação
@@ -287,14 +276,14 @@ tags$table(class="table table-striped table-hover",
 
 <h5 id="queue" class="genshin_font" style="padding-top: 90px; margin-top: -90px;">Fila de Processamento</h5>
 
-O `processamento` possui uma fila de execução de trabalhos de até **99 slots**, onde cada ingrediente será produzido de maneira unitária.
+O `processamento` possui uma fila de execução de trabalhos de até **99 slots** para cada tipo de ingrediente, cada ingrediente será produzido de maneira unitária tendo assim a sua própria fila de processamento.
 
 ```{r alert-warning-cancel}
 # SUCCESS ALERT do Nível de Preparação
 alert_icon(type = "warning",
            message = tagList(
               tags$span(
-                  "Preste atenção com a fila de execução, pois",
+                  "Preste atenção ao adicionar os produtos na fila, pois",
                   tags$strong("não é possível cancelar"),
                   "o processamento de ingredientes."
               ))

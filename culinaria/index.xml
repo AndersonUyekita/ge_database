@@ -13,7 +13,7 @@
       <pubDate>Fri, 18 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>https://db.genshinimpactbr.com.br/culinaria/processar/</guid>
-      <description>$(document).ready(function(){$(&#39;[data-toggle=&#34;popover-hover&#34;]&#39;).popover({html: true,trigger: &#39;hover&#39;,placement: &#39;top&#39;,}); });ProcessarO processamento de alimentos é necessário para atransformaçãode ingredientes brutos em novos ingredientes.ResumoO processamento de alimentos pode ser realizado nas fogueiras e nos fogões;12 ingredientes podem ser processados a partir de outros ingredientes;Não é possível cancelaro processamento, uma vez que você já tenha iniciado;Lembre-se de acender a fogueira, e;A fila de processamento é de 99 itens.</description>
+      <description>$(document).ready(function(){$(&#39;[data-toggle=&#34;popover-hover&#34;]&#39;).popover({html: true,trigger: &#39;hover&#39;,placement: &#39;top&#39;,}); });ProcessarO processamento de alimentos é necessário para atransformaçãode ingredientes brutos em novos ingredientes.ResumoO processamento de alimentos pode ser realizado nas fogueiras e nos fogões;12 ingredientes podem ser processados a partir de outros ingredientes;Não é possível cancelaro processamento, uma vez que você já tenha iniciado;A fila de processamento é de 99 itens para cada produto.</description>
     </item>
     
   </channel>

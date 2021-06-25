@@ -51,7 +51,7 @@
     <a class="navbar-brand" href="/">
         
         
-            <img src="../logo_2.svg" style="width: 80px;"/>
+        <img src="https://db.genshinimpactbr.com.br/images/logo.svg" style="width: 80px;"/>
         
         GE Database
     </a>
@@ -327,6 +327,15 @@
 
 <style>
 
+kbd .ameno {
+    padding: .1rem .3rem;
+    background-color: #32d7a0;
+    color: #1c1c22;
+}
+
+</style>
+<style>
+
 kbd {
     padding: .1rem .3rem;
     background-color: #d3bc8e;
@@ -342,7 +351,7 @@ text-align: justify;
 }
 
 </style>
-<div id="carouselExampleCaptions" class="carousel slide" style="margin-bottom: 2.0rem;" data-ride="carousel">
+<div id="carouselExampleCaptions" class="carousel slide" style="margin-bottom: 1.0rem;" data-ride="carousel">
 <ol class="carousel-indicators">
 <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
 <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -351,25 +360,25 @@ text-align: justify;
 </ol>
 <div class="carousel-inner">
 <div class="carousel-item active">
-<img style="content:url(&#39;../culinaria/liyue.png&#39;); filter: brightness(0.6);" class="d-block w-100" alt="Imagem do Forno da Cidade de Mondstadt."/>
+<img style="content:url(&#39;../culinaria/liyue.png&#39;); filter: brightness(0.6); border-radius: 0.25rem;" class="d-block w-100" alt="Imagem do Forno da Cidade de Mondstadt."/>
 <div class="carousel-caption d-none d-md-block">
 <h1 class="genshin_font">Caçador de Cervos</h1>
 </div>
 </div>
 <div class="carousel-item">
-<img style="content:url(&#39;../culinaria/mondstadt.png&#39;); filter: brightness(0.6);" class="d-block w-100" alt="Imagem do Forno da Cidade de Liyue."/>
+<img style="content:url(&#39;../culinaria/mondstadt.png&#39;); filter: brightness(0.6); border-radius: 0.25rem;" class="d-block w-100" alt="Imagem do Forno da Cidade de Liyue."/>
 <div class="carousel-caption d-none d-md-block">
 <h1 class="genshin_font">Restaurante de Wanmin</h1>
 </div>
 </div>
 <div class="carousel-item">
-<img style="content:url(&#39;../culinaria/albergue_wangshu.png&#39;); filter: brightness(0.6);" class="d-block w-100" alt="Imagem do Forno do Albergue de Wangshu."/>
+<img style="content:url(&#39;../culinaria/albergue_wangshu.png&#39;); filter: brightness(0.6); border-radius: 0.25rem;" class="d-block w-100" alt="Imagem do Forno do Albergue de Wangshu."/>
 <div class="carousel-caption d-none d-md-block">
 <h1 class="genshin_font">Albergue Wangshu</h1>
 </div>
 </div>
 <div class="carousel-item">
-<img style="content:url(&#39;../culinaria/mondstadt_externo.png&#39;); filter: brightness(0.6);" class="d-block w-100" alt="Imagem do Forno do lado externo da cidade de Mondstadt."/>
+<img style="content:url(&#39;../culinaria/mondstadt_externo.png&#39;); filter: brightness(0.6); border-radius: 0.25rem;" class="d-block w-100" alt="Imagem do Forno do lado externo da cidade de Mondstadt."/>
 <div class="carousel-caption d-none d-md-block">
 <h1 class="genshin_font">Fogueira</h1>
 </div>
@@ -391,8 +400,14 @@ A função
 </em>
 </p>
 <div class="alert alert-primary" role="alert">
-<h4>Resumo</h4>
+<h4 id="resumo" class="genshin_font" style="padding-top: 90px; margin-top: -90px;">Resumo</h4>
 <ul>
+<li>Aether e Lumine já começam com 9 pratos em seu portfólio de pratos.</li>
+<li>
+Os pratos que não precisam de
+<code>receita</code>
+possuem efeitos/atributos muito limitados.
+</li>
 <li>
 Antes de cozinhar você precisará obter a
 <code>receita</code>
@@ -410,7 +425,7 @@ você terá que possuir os
 <li>Escolha o Personagem (cozinheiro) que possua Bônus de produção ou possibilidade de obter Pratos Especiais.</li>
 </ul>
 </div>
-<p>Poucos alimentos podem ser utilizados sem a necessidade de preparação, isto é, sem ter que usar a função de culinária. Os exemplos mais triviais são:</p>
+<p>Poucos alimentos podem ser utilizados sem a necessidade de preparação, isto é, sem ter que usar a função de <code>culinária</code>. Os exemplos mais triviais são:</p>
 <ul>
 <li>Maçã, e;</li>
 <li>Fruto do Pôr do Sol.</li>
@@ -419,7 +434,7 @@ você terá que possuir os
 <h3 id="culinaria" class="genshin_font" style="padding-top: 60px; margin-top: -60px;">
 Culinária
 </h3>
-<p>Antes de cozinhar qualquer prato será necessário obter as <code>receitas</code>. Você poderá comprar as receitas de ranking menores nos NPC’s localizados nas cidades de Mondstadt e Liyue, além de encontrá-las nos baús ou em outras interações com o jogo.</p>
+<p>Poucos pratos podem ser preparados sem a necessidade de aprender as receitas, antes de prepará-las. Caso queira preparar pratos com atributos mais robustos, terás que aprender a <code>receita</code> antes. Você poderá comprar as receitas de ranking menores nos NPC’s localizados nas cidades de Mondstadt e Liyue, além de encontrá-las nos baús ou em outras interações com o jogo, tais como recompensas de uma missão.</p>
 <div class="alert alert-warning" role="alert">
 <div class="container-fluid" style="padding: 0; margin: 0;">
 <div class="row align-items-center" style="padding: 0; margin: 0;">
@@ -802,7 +817,30 @@ Escolha o Personagem
 <h5 id="autocozinhar" class="genshin_font" style="padding-top: 60px; margin-top: -60px;">
 Autocozinhar
 </h5>
-<p>A opção de <code>Autocozinhar</code> será desbloqueada somente após a obtenção da <code>proficiência</code>, essa opção possibilita a preparação de até 99 pratos de uma vez só. Cabe ressaltar que os bônus concedidos pelos <code>cozinheiros</code> continuam valendo para essa forma de cozinhar.</p>
+<p>A opção de <code>Autocozinhar</code> será desbloqueada somente após a obtenção da <code>proficiência</code>, essa opção possibilita a preparação de até <strong>99 pratos</strong> de uma vez só. Cabe ressaltar que os bônus concedidos pelos <code>cozinheiros</code> continuam valendo para essa forma de cozinhar.</p>
+<div id="carousel_carousel6" class="carousel slide" style="margin-bottom: 2.0rem;" data-ride="carousel">
+<ol class="carousel-indicators">
+<li data-target="#carousel_carousel6" data-slide-to="-1" class="active"></li>
+<li data-target="#carousel_carousel6" data-slide-to="0"></li>
+</ol>
+<div class="carousel-inner">
+<div class="carousel-item active">
+<img style="content:url(&#39;../culinaria/6_1_autocook.png&#39;);" class="card-img d-block w-100" alt="Imagem do Forno da Cidade de Mondstadt."/>
+<div class="carousel-caption d-none d-md-block"></div>
+</div>
+<div class="carousel-item">
+<img style="content:url(&#39;../culinaria/6_2_autocook.png&#39;);" class="card-img d-block w-100" alt="Imagem do Forno da Cidade de Mondstadt."/>
+<div class="carousel-caption d-none d-md-block"></div>
+</div>
+</div>
+<a class="carousel-control-prev" href="#carousel_carousel6" role="button" data-slide="prev">
+<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+<span></span>
+</a>
+<a class="carousel-control-next" href="#carousel_carousel6" role="button" data-slide="next">
+<span class="carousel-control-next-icon" aria-hidden="true"></span>
+</a>
+</div>
 <div class="alert alert-warning" role="alert">
 <div class="container-fluid" style="padding: 0; margin: 0;">
 <div class="row align-items-center" style="padding: 0; margin: 0;">
@@ -845,11 +883,6 @@ Após a obtenção da proficiência não perca o seu tempo cozinhando, use o
     
 
 
-                    
-                    <div class="row"></div> 
-                    
-                    
-                
                 <hr>
 
 
@@ -873,7 +906,7 @@ Após a obtenção da proficiência não perca o seu tempo cozinhando, use o
 
         </div> 
 
-        </div><div class="container-fluid" style="background-image: linear-gradient(white, 50%, transparent), url(https://db.genshinimpactbr.com.br//footer_bg.png); background-size: cover; background-position: center center;">
+        </div><div class="container-fluid" style="background-image: linear-gradient(white, 50%, transparent), url(/images/footer_bg.png/); background-size: cover; background-position: center center;">
     <footer class="container py-5">
         
         <div class="row">
@@ -897,12 +930,12 @@ Após a obtenção da proficiência não perca o seu tempo cozinhando, use o
                 </span>
                 <span style="text-align: center!important; font-size: 0.8rem; display: block;">
                     <a href="https://www.rstudio.com"  class="footer-links-kudos" rel="noopener noreferrer" target="_blank">
-                        <img src="https://db.genshinimpactbr.com.br//rstudio_logo.svg" height="31">
+                        <img src="/images/rstudio_logo.svg" height="31">
                     </a>
                 </span>
                 <span style="text-align: center!important; font-size: 0.8rem; display: block;">
                     <a href="https://bookdown.org/yihui/blogdown/"  class="footer-links-kudos" rel="noopener noreferrer" target="_blank">
-                        <img src="https://db.genshinimpactbr.com.br//r_blogdown.png" height="31">
+                        <img src="/images/r_blogdown.png" height="31">
                     </a>
                 </span>                
                 
@@ -910,7 +943,7 @@ Após a obtenção da proficiência não perca o seu tempo cozinhando, use o
             
             <div class="col align-self-center">
                 <span style="text-align: center!important; font-size: 0.8rem; display: block;">
-                    Este obra está licenciado com uma Licença:
+                    Esta obra está licenciada com uma Licença:
                     <br>
                     <a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="noopener noreferrer" target="_blank">
                         <img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png">
@@ -922,16 +955,16 @@ Após a obtenção da proficiência não perca o seu tempo cozinhando, use o
             
             <div class="col align-self-center">
                 <span style="text-align: center!important; font-size: 0.8rem; display: block;">
-                    <a href="https://gohugo.io/" class="footer-links-kudos" rel="noopener noreferrer" target="_blank">
+                    <a href="https://gohugo.io/" class="footer-links-kudos" rel="noopener noreferrer" target="_blank" style="color: black">
                         Made with
-                        <img src="https://db.genshinimpactbr.com.br//hugo-logo.png" width="31" height="31">
+                        <img src="/images/hugo-logo.png" width="31" height="31">
                         <br>
                         <br>
                     </a>
-                    <a href="https://vantage-design.com" class="footer-links-kudos" rel="noopener noreferrer" target="_blank">
+                    <a href="https://vantage-design.com" class="footer-links-kudos" rel="noopener noreferrer" target="_blank" style="color: black">
                         Tema: Ace documentation
                         <br>
-                        <img src="https://db.genshinimpactbr.com.br//vantage_design_logo.png" height="31">
+                        <img src="/images/vantage_design_logo.png" height="31">
                     </a>
                     
                 </span>
