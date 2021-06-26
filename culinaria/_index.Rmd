@@ -8,11 +8,12 @@ tags: []
 disableReadmoreNav: true
 disable_comments: false
 weight: 1
+draft: false
 ---
 
 <style>
 
-kbd .ameno {
+kbd.anemo {
     padding: .1rem .3rem;
     background-color: #32d7a0;
     color: #1c1c22;
@@ -53,7 +54,7 @@ source("./R/consumiveis.R", encoding = "UTF-8")
 source("./R/default.R", encoding = "UTF-8")
 ```
 
-```{r carousel}
+```{r carousel-img-overlay}
 library(shiny)
 
 # Função Carousel
@@ -75,28 +76,28 @@ carousel_wrapper <- function() {
                      ),
              tags$div(class="carousel-inner",
                       tags$div(class="carousel-item active",
-                               tags$img(style="content:url('../culinaria/liyue.png'); filter: brightness(0.6); border-radius: 0.25rem;",
+                               tags$img(style="content:url('../culinaria/1_1_mondstadt.png'); filter: brightness(0.6); border-radius: 0.25rem;",
                                         class="d-block w-100",
                                         alt="Imagem do Forno da Cidade de Mondstadt."),
                                tags$div(class="carousel-caption d-none d-md-block",
                                         tags$h1(class="genshin_font",
                                                 "Caçador de Cervos"))),
                       tags$div(class="carousel-item",
-                               tags$img(style="content:url('../culinaria/mondstadt.png'); filter: brightness(0.6); border-radius: 0.25rem;",
+                               tags$img(style="content:url('../culinaria/1_2_liyue.png'); filter: brightness(0.6); border-radius: 0.25rem;",
                                         class="d-block w-100",
                                         alt="Imagem do Forno da Cidade de Liyue."),
                                tags$div(class="carousel-caption d-none d-md-block",
                                         tags$h1(class="genshin_font",
                                                 "Restaurante de Wanmin"))),
                       tags$div(class="carousel-item",
-                               tags$img(style="content:url('../culinaria/albergue_wangshu.png'); filter: brightness(0.6); border-radius: 0.25rem;",
+                               tags$img(style="content:url('../culinaria/1_3_albergue_wangshu.png'); filter: brightness(0.6); border-radius: 0.25rem;",
                                         class="d-block w-100",
                                         alt="Imagem do Forno do Albergue de Wangshu."),
                                tags$div(class="carousel-caption d-none d-md-block",
                                         tags$h1(class="genshin_font",
                                                 "Albergue Wangshu"))),
                       tags$div(class="carousel-item",
-                               tags$img(style="content:url('../culinaria/mondstadt_externo.png'); filter: brightness(0.6); border-radius: 0.25rem;",
+                               tags$img(style="content:url('../culinaria/1_4_mondstadt_externo.png'); filter: brightness(0.6); border-radius: 0.25rem;",
                                         class="d-block w-100",
                                         alt="Imagem do Forno do lado externo da cidade de Mondstadt."),
                                tags$div(class="carousel-caption d-none d-md-block",
@@ -129,309 +130,38 @@ tags$p(class="lead",
 ```{r resumo}
 resumo_wrapper(
     lista = tags$ul(
-             tags$li("Aether e Lumine já começam com 9 pratos em seu portfólio de pratos."),
-             tags$li("Os pratos que não precisam de", tags$code("receita") , "possuem efeitos/atributos muito limitados."),
-             tags$li("Antes de cozinhar você precisará obter a", tags$code("receita"), ";"),
-             tags$li("Após você obter a", tags$code("receita"), "você terá que possuir os", tags$code("ingredientes"), ";"),
-             tags$li("Lembre-se de acender a fogueira;"),
-             tags$li("Atente-se até obter a proficiência, pois o desempenho na preparação afetará a qualidade do prato entre suspeito, normal e delicioso;"),
-             tags$li("Escolha o Personagem (cozinheiro) que possua Bônus de produção ou possibilidade de obter Pratos Especiais.")
+             tags$li("Somente a maçã e o fruto-do-pôr-do-sol podem ser consumidos sem preparação;"),
+             tags$li("Cozinhe pratos e processe alimentos para obter itens de regeneração de vida ou de buffs"),
+             tags$li("Para cozinhar será necessário a prévia obtenção de ingredientes e do aprendizado da receita;"),
+             tags$li("Há aproximadamente 100 pratos para serem feitos;"),
+             tags$li("Para processar alimentos somente será necessário a prévia obtenção de ingredientes, e;"),
+             tags$li("Há 12 ingredientes que podem ser processados.")
              ))
 ```
 
-Poucos alimentos podem ser utilizados sem a necessidade de preparação, isto é, sem ter que usar a função de `culinária`. Os exemplos mais triviais são:
+Poucos alimentos podem ser utilizados sem a necessidade de preparação, isto é, sem ter que usar a função de `culinária`. Os únicos alimentos que podem ser consumidos *in-natura* são:
 
 * Maçã, e;
 * Fruto do Pôr do Sol.
 
 Ambos restauram míseros 300 de Vida. Portanto, eles só serão úteis para os primeiros níveis, após o avanço no jogo será necessário a preparação de pratos a partir da `culinária` para a criação de itens que regeneram pontos de vida (HP) ou que concedem *buffs*.
 
-<h3 id="culinaria" class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Culinária</h3>
+<h3 id="culinaria" class="genshin_font" style="padding-top: 90px; margin-top: -90px;">Culinária</h3>
 
-Poucos pratos podem ser preparados sem a necessidade de aprender as receitas, antes de prepará-las. Caso queira preparar pratos com atributos mais robustos, terás que aprender a `receita` antes. Você poderá comprar as receitas de ranking menores nos NPC's localizados nas cidades de Mondstadt e Liyue, além de encontrá-las nos baús ou em outras interações com o jogo, tais como recompensas de uma missão.
+A função `culinária` pode ser acessada quando um personagem jogável se aproxima de um fogão ou de uma fogueira com uma panela. As figuras abaixos mostram alguns exemplos de locais onde se pode utilizar a função de culinária.
 
-```{r alert-culinaria}
-# WARNING ALERT do Nível de Preparação
-alert_icon(type = "warning",
-           message = tagList(
-             tags$span("Os pratos são habilitados para cozinhar somente após você",
-                       tags$strong("aprender"), "."),
-             tags$p("Fogão > Cozinhar / Todos > Selecionar Receita > Aprender")
-           )
-)
-```
-
-Em algumas receitas será necessário `processar` alguns alimentos antes de preparar o prato ou comprá-las nos NPC's.
-
-<h5 id="cozinhar" class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Cozinhar</h5>
-
-O mecanismo da culinária é uma alusão ao tempo de cocção do prato na vida real, caso o prato seja finalizado antes ou muito depois do tempo ideal os seus efeitos não serão maximizados.
-
-```{r carousel-cozinhar}
-
-# Insere um Carousel
-two_columns_carousel_text(
-  
-    # Imagem na Esquerda.
-    config = "2",
-  
-    # Definição das imagens
-    figures = carousel_n_images(
-      
-        # Definição de ID.
-        id = "carousel2",
-        
-        # Endereços das imagens.
-        url_list = list("../culinaria/2_1_bitmap.png",
-                        "../culinaria/2_2_concluido.png",
-                        "../culinaria/2_3_sucesso.png",
-                        "../culinaria/2_4_perfeito.png"),
-        
-        # Alt de cada uma das imagens.
-        alt_list = list("Tela de preparo para cozinhar os pratos.",
-                        "",
-                        "",
-                        "")
-        ),
-    
-    # Corpo do Texto do Carousel.
-    message = tagList(
-      tags$p("Desde modo, o ponteiro simula o tempo de cocção do prato e cabe ao jogador clicar em", tags$kbd("Parar"),"para determinar o ponto desejado de preparação do prato."),
-      tags$p("Embora o mini-game da culinária seja divertido no início do jogo, no longo prazo isso se torna irritante ao ter que cozinhar unitariamente as comidas. Deste modo, há a possibilidade de", tags$code("Autocozinhar"), "que será desbloqueado somente após a obtenção da", tags$code("proficiência"),".")
-      )
-    )
-```
-
-<h5 id="proficiencia" class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Proficiência</h5>
-
-A proficiência é necessária apenas para habilitar o `autocozinhar`, a condição para obter a proficiência é a preparação de um certo número de pratos `perfeitos`. De acordo com o nível do prato haverá uma maior necessidade de pratos `perfeitos`.
-
-```{r table-cook-proficiency}
-tags$table(class="table table-striped table-hover",
-           style="margin-left: auto; margin-right: auto; table-layout: fixed;",
-           tags$thead(
-                tags$tr(
-                    tags$th(style="text-align: center; vertical-align: middle;",
-                        "Nível da Receita"),
-                    tags$th(style="text-align: center; vertical-align: middle;",
-                        "Quantidade de Pratos Perfeitos")
-                )
-           ),
-           tags$tbody(
-                tags$tr(
-                    tags$td(
-                        tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"))
-                    ),
-                    tags$td(style="text-align: center; vertical-align: middle;","5")
-                ),
-                tags$tr(
-                    tags$td(
-                        tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"),
-                                  tags$i(class="fa fa-star", `aria-hidden`="true"))
-                    ),
-                    tags$td(style="text-align: center; vertical-align: middle;","10")
-                ),
-                tags$tr(
-                    tags$td(
-                        tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"),
-                                  tags$i(class="fa fa-star", `aria-hidden`="true"),
-                                  tags$i(class="fa fa-star", `aria-hidden`="true"))
-                    ),
-                    tags$td(style="text-align: center; vertical-align: middle;","15")
-                ),
-                tags$tr(
-                    tags$td(
-                        tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"),
-                                  tags$i(class="fa fa-star", `aria-hidden`="true"),
-                                  tags$i(class="fa fa-star", `aria-hidden`="true"),
-                                  tags$i(class="fa fa-star", `aria-hidden`="true"))
-                    ),
-                    tags$td(style="text-align: center; vertical-align: middle;","20")
-                ),
-                tags$tr(
-                    tags$td(
-                        tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"),
-                                  tags$i(class="fa fa-star", `aria-hidden`="true"),
-                                  tags$i(class="fa fa-star", `aria-hidden`="true"),
-                                  tags$i(class="fa fa-star", `aria-hidden`="true"),
-                                  tags$i(class="fa fa-star", `aria-hidden`="true"))
-                    ),
-                    tags$td(style="text-align: center; vertical-align: middle;","25")
-                )
-           )) -> recipe_table
-
-two_columns_carousel_text(
-    figures = carousel_n_images(
-      
-        id = "carousel5",
-        
-        url_list = list("../culinaria/1_recipe.png",
-                        "../culinaria/2_recipe.png",
-                        "../culinaria/3_recipe.png",
-                        "../culinaria/4_recipe.png",
-                        "../culinaria/5_recipe.png"),
-        
-        alt_list = list("../culinaria/1_recipe.png",
-                        "../culinaria/2_recipe.png",
-                        "../culinaria/3_recipe.png",
-                        "../culinaria/4_recipe.png",
-                        "../culinaria/5_recipe.png")),
-    message = tagList(recipe_table),
-    config = "1")
-```
-
-```{r alert-proficiency}
-# WARNING ALERT do Nível de Preparação
-alert_icon(type = "warning",
-           message = tagList(
-              tags$span("Somente os pratos",
-                        tags$strong("perfeitos"),
-                        "serão contabilizados para a proficiência.")
-              )
-           )
-```
-
-<h5 id="ingredientes" class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Ingredientes</h5>
-
-Os `ingredientes` são itens coletáveis dos cenários do jogo que podem ser obtidos de diversas maneiras, desde itens que podem ser obtidos através dos animais vivos (javalis, pássaros, peixes etc.), bem como podem ser encontrados espalhados nos campos (ovos de pássaro, cogumelos, frutas etc.).
-
-Note que muitos ingredientes são vendidos por NPC's espalhados por toda Teyvat, mas a oferta desses ingredientes possui um **limite** que é renovado de tempo em tempo, sendo assim necessário esperar por algumas horas ou dias para o limite de compra ser *resetado*.
-
-<h5 id="processar" class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Processar</h5>
-
-Alguns ingredientes precisarão de um `processamento` para a obtenção de novos ingredientes, esse processo geralmente só precisa que algumas unidades do ingrediente "bruto" seja processado por um tempo até que ele se torne um novo ingrediente. No entanto, há casos onde será necessário o uso de dois ingredientes "brutos".
-
-Exemplos:
-
-* `Manteiga`: Será necessário processar `02 leites` por 5 minutos, e;
-* `Preseunto`: Será necessário processar `02 Carnes cruas` e `01 Sal` por 5 minutos. 
-
-<h5 id="qualidade" class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Nível de preparação</h5>
-
-```{r carousel-dish-quality}
-
-# Insere um Carousel
-two_columns_carousel_text(
-  
-    # Imagem na Esquerda.
-    config = "2",
-  
-    # Definição das imagens
-    figures = carousel_n_images(
-      
-        # Definição de ID.
-        id = "carousel3",
-        
-        # Endereços das imagens.
-        url_list = list("../culinaria/3_1_suspicious.png",
-                        "../culinaria/3_2_normal.png",
-                        "../culinaria/3_3_delicious.png"),
-        
-        # Alt de cada uma das imagens.
-        alt_list = list("Nível de preparação Concluído que resulta em pratos Esquisitos.",
-                        "Nível de preparação Sucesso que resulta em pratos Normais.",
-                        "Nível de preparação Perfeito que resulta em pratos Deliciosos.")
-        ),
-    
-    # Corpo do Texto do Carousel.
-    message = tagList(
-      tags$p("Há 3 (três) níveis de preparação (ou qualidade) que dependem unicamente do jogador:"),
-      tags$p(
-          tags$ul(
-              tags$li("Concluído: Resultará num prato Esquisito;"),
-              tags$li("Sucesso: Resultará num prato Normal, e;"),
-              tags$li("Perfeito: resultará num prato Delicioso.")
-              )
-          ),
-      tags$p("No entanto, há um quarto nível de preparação que depende do personagem selecionado como",
-             tags$code("cozinheiro"), ". Esse assunto será abordado no próximo tópico.")
-      )
-    )
-```
-
-```{r alert-dish-quality}
-# SUCCESS ALERT do Nível de Preparação
-alert_icon(type = "success",
-           message = tagList(
-               "Busque cozinhar pratos", tags$strong("perfeitos"), "para maximizar os efeitos e otimizar o consumo de ingredientes."
-           ))
-```
-
-<h5 id="special_dish" class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Escolha o Personagem</h5>
-
-Os pratos preparados possuem uma probabilidade de terem um bônus de acordo com o personagem que será o `cozinheiro` que podem ser: <kbd>produção em dobro</kbd> e <kbd>prato especial</kbd>.
-
-* Produção em dobro: Alguns personagens possuem Talentos Passivos que dão bônus no preparo de pratos, e;
-* Prato Especial: Em exceção aos personagens `Aether` e `Lumine`, todos os demais personagens jogáveis possuem um prato especial.
-    * Encontre a lista completa na Seção Pratos Especial ou clicando aqui.
-
-O exemplo abaixo diz respeito ao prato **Espeto de Frango com Cogumelos** que possui uma probabilidade de 12% de ter um <kbd>bônus de produção em dobro</kbd> em comidas de efeito de regeneração de vida quando `Jean`, `Diona` ou `Barbara` são os cozinheiros. Ao passo que `Kaeya` possui uma probabilidade de 20% de produzir um <kbd>prato especial</kbd> independente do nível de preparação. Para os demais personagens não há bônus algum para este específico prato de regeneração de vida.
-
-```{r carousel-chef}
-# Table preparation
-bonus <- c("Produção em dobro", "Prato Especial")
-probabilidade <- c("12%", "20%")
-condicao <- c("Nível de Preparação Perfeito.", "Não há.")
-
-# Creating DataFrame.
-data.frame(bonus, probabilidade, condicao) %>%
-  kbl(col.names = c("Bônus", "Probabilidade", "Condição")) %>%
-  kable_styling(full_width = TRUE,
-                bootstrap_options = c("striped",
-                                      "hover")) -> table_bonus
-
-# Insere um Carousel
-two_columns_carousel_text(
-  
-    # Imagem na Esquerda.
-    config = "1",
-  
-    # Definição das imagens
-    figures = carousel_n_images(
-      
-        # Definição de ID.
-        id = "carousel4",
-        
-        # Endereços das imagens.
-        url_list = list("../culinaria/4_1_production_bonus.png",
-                        "../culinaria/4_2_special_dish.png",
-                        "../culinaria/4_3_no_bonus.png",
-                        "../culinaria/4_4_char_list.png"),
-        
-        # Alt de cada uma das imagens.
-        alt_list = list("Personagem com Bônus de Produção.",
-                        "Personagem com Prato Especial.",
-                        "Personagem sem Bônus.",
-                        "Lista de Personagens.")
-        ),
-    
-    # Corpo do Texto do Carousel.
-    message = tagList(
-      HTML(table_bonus)
-    ))
-```
-
-```{r alert-chef}
-# SUCCESS ALERT do Nível de Preparação
-alert_icon(type = "warning",
-           message = tagList(
-              "Não se esqueça de selecionar os personagens que possuam bônus para a produção de pratos em maior quantidade ou pratos especiais.")
-           )
-```
-
-<h5 id="autocozinhar" class="genshin_font" style="padding-top: 60px; margin-top: -60px;">Autocozinhar</h5>
-
-A opção de `Autocozinhar` será desbloqueada somente após a obtenção da `proficiência`, essa opção possibilita a preparação de até **99 pratos** de uma vez só. Cabe ressaltar que os bônus concedidos pelos `cozinheiros` continuam valendo para essa forma de cozinhar.
-
-```{r carousel-autocook}
+```{r carousel-culinaria}
 carousel_n_images(
+  
+        # É SINGLE! Figura sem texto ao lado.
+        single = TRUE,
       
         # Definição de ID.
         id = "carousel6",
         
         # Endereços das imagens.
-        url_list = list("../culinaria/6_1_autocook.png",
-                        "../culinaria/6_2_autocook.png"),
+        url_list = list("../culinaria/2_1_fogao.png",
+                        "../culinaria/2_2_fogueira.png"),
         
         # Alt de cada uma das imagens.
         alt_list = list("Nível de preparação Concluído que resulta em pratos Esquisitos.",
@@ -439,42 +169,214 @@ carousel_n_images(
         )
 ```
 
-```{r alert-warning-autocook}
-# SUCCESS ALERT do Nível de Preparação
-alert_icon(type = "warning",
-           message = tagList(
-              tags$span(
-                  "Não há como cancelar o",
-                  tags$strong("autocozinhar"),
-                  ", pois o processo é instantâneo."
-              ))
-           )
+Ao acessar a `culinária` haverá duas possibilidades:
+
+* **Cozinhar:** Crie pratos para regenerar pontos de vida ou conferir bônus aos personagens, e;
+* **Processar:** Transforme ingredientes "simples" em ingredientes "avançados".
+
+<h5 id="cozinhar" class="genshin_font" style="padding-top: 90px; margin-top: -90px;">Cozinhar</h5>
+
+Há aproximadamente 100 pratos para serem preparados na opção `cozinhar`, das quais 9 não precisam de receita, pois já estão no portfólio de pratos de Aether e Lumine desde o início da jornada em Teyvat. Para `cozinhar` será necessário que o jogador tenha em mãos os ingredientes e a receita do prato almejado já aprendida. A figura abaixo alguns pratos para serem preparados.
+
+```{r img-single-cozinhar}
+single_img_75(path = "3_1_cozinhar.png",
+              alt_ = "Opção de cozinhar da função Culinária.")
 ```
 
-```{r alert-success-autocook}
-# SUCCESS ALERT do Nível de Preparação
-alert_icon(type = "success",
-           message = tagList(
-              "Após a obtenção da proficiência não perca o seu tempo cozinhando, use o ",
-              tags$strong("autocozinhar")," e continue desfrutando dos ",
-              tags$strong("bônus dos cozinheiros"),".")
-           )
+Para maiores informações e detalhamento de como funciona o função de `cozinhar`, acesse a página dedicada para esse assunto.
+
+```{r reference-cozinhar}
+call_reference(path_png = "thumb_cozinhar.png",
+               path_url = "/culinaria/cozinhar",
+               alt_ = "Imagem",
+               nome_section = "Cozinhar",
+               mensagem = "Pratos, Receitas, Ingredientes etc.")
+```
+
+<h5 id="processar" class="genshin_font" style="padding-top: 90px; margin-top: -90px;">Processar</h5>
+
+Aether e Lumine já começam o jogo com um portfólio de 12 ingredientes que podem ser processados, até então serão somente esses 12 ingredientes que poderão ser processados. Tal como a função de cozinhar, a função `processar` também requer que o jogador tenha em mãos os ingredientes. A figura abaixo mostra a janela onde se pode processar os ingredientes. 
+
+```{r img-single-processar}
+single_img_75(path = "4_1_processar.png",
+              alt_ = "Opção de processar da função Culinária")
+```
+
+Para maiores informações e detalhamento de como funciona o função de `processar`, acesse a página dedicada para esse assunto.
+
+```{r reference-processar}
+call_reference(path_png = "thumb_processar.png",
+               path_url = "/culinaria/processar",
+               alt_ = "Imagem",
+               nome_section = "Processar",
+               mensagem = "Acesse para obter mais informações e detalhes.")
+```
+
+```{r post_details}
+# Dados da publicação
+day <- 25
+month <- 06
+year <- 2021
+version <- 1.6
+
+# Criação das datas
+full_date <- sprintf("%s/%s/%s",day,month,year)
+full_date_js <- sprintf("%s,%s,%s", year, month, day)
+
+tagList(
+   tags$div(class="container-fluid",
+      tags$ul(
+         tags$li("Não há pendências.")
+      ),
+      tags$p("Progresso da Publicação"),
+      tags$div(class="progress",
+      tags$div(class="progress-bar",
+               role="progressbar",
+               style="width: 100%;",
+               `aria-valuenow`="100",
+               `aria-valuemin`="0",
+               `aria-valuemax`="100",
+               "100%"))
+      )
+) -> progresso
+
+# Esse Wrapper cria uma caixa de detalhes da publicação.
+
+# Cria um Card com figura lateral.
+tags$div(class="card mb-3",
+         style="max-width: 100%; margin-top: 4rem;",
+   tags$div(class="row no-gutters",
+      # DIV da IMG
+      tags$div(class="col-md-4",
+         # Imagem do Hilichurls
+         tags$img(class="card-img",
+                  src="author.png",
+                  alt="Hilichurls Scholar")),
+      # DIV de conteúdo
+      tags$div(class="col-md-8",
+         # Cria um outro Card para comportar as Navbars
+         tags$div(class="card-body",
+                  style="padding: 0px;",
+            tags$div(class="card text-justify",
+                     style="border:0px;",
+               # NAVBARS
+               tags$div(class="card-header",
+                  tags$ul(class="nav nav-tabs card-header-tabs",
+                     # Dados de Publicação
+                     tags$li(class="nav-item",
+                        tags$a(class="nav-link active",
+                               id="publication_info-tab",
+                               `data-toggle`="tab",
+                               href="#publication_info",
+                               role="tab",
+                               `aria-controls`="publication_info",
+                               `aria-selected`="true",
+                               "Dados de Publicação")),
+                     # Progresso
+                     tags$li(class="nav-item",
+                        tags$a(class="nav-link",
+                               id="progress-tab",
+                               `data-toggle`="tab",
+                               href="#progress",
+                               role="tab",
+                               `aria-controls`="progress",
+                               `aria-selected`="false",
+                               "Progresso")))),
+               # Conteúdos dos TABS
+               tags$div(class="tab-content",
+                        style="margin: 1rem;",
+                  # Dados da Publicação
+                  tags$div(class="tab-pane fade show active",
+                           id="publication_info",
+                           role="tabpanel",
+                           `aria-labelledby`="publication_info-tab",
+                           # Título
+                           tags$h5(class="card-title",
+                                   "Hilichurls Scholar's Team"),
+                           # Texto padrão.
+                           tags$p(class="card-text",
+                                  "É o time dedicado na atualização dos dados do Genshin Impact."),
+                           # Dados da publicação.
+                           tags$ul(
+                              tags$li(sprintf("Data da publicação: %s", full_date)),
+                              tags$li(sprintf("Versão do Jogo: %s", version))
+                           )),
+                  # Progresso
+                  tags$div(class="tab-pane fade",
+                           id="progress",
+                           role="tabpanel",
+                           `aria-labelledby`="progress-tab",
+                           progresso)))))),
+   tags$div(class="card-footer",
+      tags$small(class="text-muted",
+                 id="js_script"
+                 )))
+
+```
+
+<script>
+var date = "`r full_date_js`"
+</script>
+
+```{js}
+// Função para calcula a diferença entre a data de publicação e de leitura.
+function calcDate() {
+   
+   // Inicialização das variáveis.
+   var date1 = new Date(date);  // Publicacao -> 0: Janeiro, 1: Fevereiro ... 11: Dezembro
+   var date2 = new Date();            // HOJE
+    
+   // To calculate the time difference of two dates
+   var Difference_In_Time = date2.getTime() - date1.getTime();
+    
+   // To calculate the no. of days between two dates
+   var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+    
+   // Para conferir os dias! Tire o comentário para avaliar.
+   //document.write(Difference_In_Days)
+    
+   // HOJE
+   if (Math.floor(Difference_In_Days) == 0) {
+      return "Atualizado hoje."
+      
+   // ONTEM
+   } else if (Math.floor(Difference_In_Days) == 1) {
+      return "Atualizado ontem."
+
+   // Dias atrás
+   } else if (Math.floor(Difference_In_Days) > 1 && Math.floor(Difference_In_Days) < 30) {
+      return "Última atualização há " + Math.floor(Difference_In_Days) + " dias."
+      
+   // 1 MÊS atrás
+   } else if (Math.floor(Difference_In_Days) >= 30 && Math.floor(Difference_In_Days) < 60) {
+      return "Última atualização há " + Math.floor(Difference_In_Days/30) + " mês."
+      
+   // Vários Meses atrás
+   } else if (Math.floor(Difference_In_Days) >= 60 && Math.floor(Difference_In_Days) < 365) {
+      return "Última atualização há " + Math.floor(Difference_In_Days/30) + " meses."
+   
+   // Primeiro ano.
+   } else if (Math.floor(Difference_In_Days) >= 365 && Math.floor(Difference_In_Days) <= 729) {
+   	return "Última atualização há " + Math.floor(Difference_In_Days/360) + " ano"
+   
+   // Demais anos.
+   } else {
+   	return "Última atualização há " + Math.floor(Difference_In_Days/360) + " anos"}
+}
+
+// Chama a função e atualiza o elemento de ID js_script
+document.getElementById("js_script").innerHTML = calcDate()
 ```
 
 ```{r creating-toc}
 # Criação da sequência do TOC.
 '<nav id="TableOfContents">
 <ul>
-   <li><a href="#top">Resumo</a></li>
+   <li><a href="#resumo">Resumo</a></li>
    <ul>
       <li><a href="#culinaria">Culinária</a></li>
       <li><a href="#cozinhar">Cozinhar</a></li>
-      <li><a href="#proficiencia">Proficiência</a></li>
-      <li><a href="#ingredientes">Ingredientes</a></li>
       <li><a href="#processar">Processar</a></li>
-      <li><a href="#qualidade">Nível de preparação</a></li>
-      <li><a href="#special_dish">Escolha o Personagem</a></li>
-      <li><a href="#autocozinhar">Autocozinhar</a></li>
    </ul>
 </ul>
 </nav>' -> toc_in_text

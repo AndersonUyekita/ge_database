@@ -295,19 +295,6 @@
         </li>
         </ul>
     </li>
-    <li data-nav-id="/consumiveis/" class="nav-item my-1 haschildren
-        ">
-        
-        <a class="nav-link p-0" href="/consumiveis/"><h6>Consumíveis</h6></a>
-        <ul class="list-unstyled ml-2">
-        <li data-nav-id="/consumiveis/cozinhar/" class="nav-item my-1">
-                
-                 <a href="/consumiveis/cozinhar/" class="nav-link p-0">
-                    Culinária
-                </a>
-        </li>
-        </ul>
-    </li>
         </ul>
     </div>
 </nav>
@@ -352,33 +339,59 @@ O processamento de alimentos é necessário para a
 <h4 id="resumo" class="genshin_font" style="padding-top: 90px; margin-top: -90px;">Resumo</h4>
 <ul>
 <li>O processamento de alimentos pode ser realizado nas fogueiras e nos fogões;</li>
-<li>12 ingredientes podem ser processados a partir de outros ingredientes;</li>
+<li>
+Ao todo estão disponíveis
+<strong>12 ingredientes</strong>
+que podem ser obtidos através de
+<code>Processar</code>
+;
+</li>
 <li>
 Não é possível 
-<code>cancelar</code>
-o processamento, uma vez que você já tenha iniciado;
+<strong>cancelar</strong>
+o processamento, uma vez que você já o tenha iniciado;
 </li>
-<li>A fila de processamento é de 99 itens para cada produto.</li>
+<li>
+A fila de processamento é de
+<strong>99 itens</strong>
+para
+<strong>cada produto</strong>
+, e;
+</li>
+<li>
+Após a finalização do procesamento, o item
+<strong>não é disponibilizado</strong>
+automaticamente no inventário.
+</li>
 </ul>
 </div>
-<p>Atualmente a função <code>processar</code> presente na função <code>culinária</code> pode gerar 12 novos ingredientes, das quais serão utilizados na elaboração de outros pratos.</p>
-<div id="carousel_carousel1" class="carousel slide" style="margin-bottom: 2.0rem;" data-ride="carousel">
+<p>Atualmente a função <code>processar</code> presente em <code>culinária</code> pode gerar 12 novos ingredientes, das quais serão utilizados na elaboração de outros pratos. A figura abaixo mostra a janela de <code>Processar</code>.</p>
+<div class="container-fluid" style="width: 75%;">
+<div class="row justify-content-center">
+<div id="carousel_1" class="carousel slide" style="margin-bottom: 2.0rem;" data-ride="carousel">
 <ol class="carousel-indicators">
-<li data-target="#carousel_carousel1" data-slide-to="-1" class="active"></li>
+<li data-target="#carousel_1" data-slide-to="-1" class="active"></li>
+<li data-target="#carousel_1" data-slide-to="0"></li>
 </ol>
 <div class="carousel-inner">
 <div class="carousel-item active">
-<img style="content:url(&#39;../culinaria/1_1_process.png&#39;);" class="card-img d-block w-100" alt="Imagem do Forno da Cidade de Mondstadt."/>
+<img style="content:url(&#39;1_1_process.png&#39;);" class="card-img d-block w-100" alt="Imagem do Forno da Cidade de Mondstadt."/>
+<div class="carousel-caption d-none d-md-block"></div>
+</div>
+<div class="carousel-item">
+<img style="content:url(&#39;1_2_process_waiting.png&#39;);" class="card-img d-block w-100" alt="Imagem do Forno da Cidade de Mondstadt."/>
 <div class="carousel-caption d-none d-md-block"></div>
 </div>
 </div>
-<a class="carousel-control-prev" href="#carousel_carousel1" role="button" data-slide="prev">
+<a class="carousel-control-prev" href="#carousel_1" role="button" data-slide="prev">
 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 <span></span>
 </a>
-<a class="carousel-control-next" href="#carousel_carousel1" role="button" data-slide="next">
+<a class="carousel-control-next" href="#carousel_1" role="button" data-slide="next">
 <span class="carousel-control-next-icon" aria-hidden="true"></span>
 </a>
+</div>
+</div>
 </div>
 <div class="alert alert-warning" role="alert">
 <div class="container-fluid" style="padding: 0; margin: 0;">
@@ -391,7 +404,7 @@ o processamento, uma vez que você já tenha iniciado;
 <span>
 O processamento de alimentos 
 <strong>não é  imediato</strong>
-, desta forma cada novo ingrediente possui um tempo de preparo.
+, logo para cada produto escolhido terá um tempo de preparo.
 </span>
 </span>
 </div>
@@ -636,7 +649,34 @@ Tabela de Processos de Ingredientes
 <h5 id="queue" class="genshin_font" style="padding-top: 90px; margin-top: -90px;">
 Fila de Processamento
 </h5>
-<p>O <code>processamento</code> possui uma fila de execução de trabalhos de até <strong>99 slots</strong> para cada tipo de ingrediente, cada ingrediente será produzido de maneira unitária tendo assim a sua própria fila de processamento.</p>
+<p>O <code>processamento</code> possui uma fila de execução de trabalhos de até <strong>99 slots</strong> para cada tipo de ingrediente, cada ingrediente será produzido de maneira unitária tendo assim a sua própria fila de processamento. Além disso, após o processamento ser finalizado, ele não é enviado automaticamente para o inventário, deste modo será necessário clicar em <strong>obter</strong> para disponibilizá-lo para <code>cozinhar</code>.</p>
+<div class="container-fluid" style="width: 75%;">
+<div class="row justify-content-center">
+<div id="carousel_2" class="carousel slide" style="margin-bottom: 2.0rem;" data-ride="carousel">
+<ol class="carousel-indicators">
+<li data-target="#carousel_2" data-slide-to="-1" class="active"></li>
+<li data-target="#carousel_2" data-slide-to="0"></li>
+</ol>
+<div class="carousel-inner">
+<div class="carousel-item active">
+<img style="content:url(&#39;2_1_process_queue.png&#39;);" class="card-img d-block w-100" alt="Imagem do Forno da Cidade de Mondstadt."/>
+<div class="carousel-caption d-none d-md-block"></div>
+</div>
+<div class="carousel-item">
+<img style="content:url(&#39;2_2_process_done.png&#39;);" class="card-img d-block w-100" alt="Imagem do Forno da Cidade de Mondstadt."/>
+<div class="carousel-caption d-none d-md-block"></div>
+</div>
+</div>
+<a class="carousel-control-prev" href="#carousel_2" role="button" data-slide="prev">
+<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+<span></span>
+</a>
+<a class="carousel-control-next" href="#carousel_2" role="button" data-slide="next">
+<span class="carousel-control-next-icon" aria-hidden="true"></span>
+</a>
+</div>
+</div>
+</div>
 <div class="alert alert-warning" role="alert">
 <div class="container-fluid" style="padding: 0; margin: 0;">
 <div class="row align-items-center" style="padding: 0; margin: 0;">
@@ -655,6 +695,105 @@ o processamento de ingredientes.
 </div>
 </div>
 </div>
+<div class="card mb-3" style="max-width: 100%; margin-top: 4rem;">
+<div class="row no-gutters">
+<div class="col-md-4">
+<img class="card-img" src="author.png" alt="Hilichurls Scholar"/>
+</div>
+<div class="col-md-8">
+<div class="card-body" style="padding: 0px;">
+<div class="card text-justify" style="border:0px;">
+<div class="card-header">
+<ul class="nav nav-tabs card-header-tabs">
+<li class="nav-item">
+<a class="nav-link active" id="publication_info-tab" data-toggle="tab" href="#publication_info" role="tab" aria-controls="publication_info" aria-selected="true">Dados de Publicação</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" id="progress-tab" data-toggle="tab" href="#progress" role="tab" aria-controls="progress" aria-selected="false">Progresso</a>
+</li>
+</ul>
+</div>
+<div class="tab-content" style="margin: 1rem;">
+<div class="tab-pane fade show active" id="publication_info" role="tabpanel" aria-labelledby="publication_info-tab">
+<h5 class="card-title">Hilichurls Scholar's Team</h5>
+<p class="card-text">É o time dedicado na atualização dos dados do Genshin Impact.</p>
+<ul>
+<li>Data da publicação: 25/6/2021</li>
+<li>Versão do Jogo: 1.6</li>
+</ul>
+</div>
+<div class="tab-pane fade" id="progress" role="tabpanel" aria-labelledby="progress-tab">
+<div class="container-fluid">
+<ul>
+<li>Não há pendências.</li>
+</ul>
+<p>Progresso da Publicação</p>
+<div class="progress">
+<div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="card-footer">
+<small class="text-muted" id="js_script"></small>
+</div>
+</div>
+<script>
+var date = "2021,6,25"
+</script>
+<script type="text/javascript">
+// Função para calcula a diferença entre a data de publicação e de leitura.
+function calcDate() {
+   
+   // Inicialização das variáveis.
+   var date1 = new Date(date);  // Publicacao -> 0: Janeiro, 1: Fevereiro ... 11: Dezembro
+   var date2 = new Date();            // HOJE
+    
+   // To calculate the time difference of two dates
+   var Difference_In_Time = date2.getTime() - date1.getTime();
+    
+   // To calculate the no. of days between two dates
+   var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+    
+   // Para conferir os dias! Tire o comentário para avaliar.
+   //document.write(Difference_In_Days)
+    
+   // HOJE
+   if (Math.floor(Difference_In_Days) == 0) {
+      return "Atualizado hoje."
+      
+   // ONTEM
+   } else if (Math.floor(Difference_In_Days) == 1) {
+      return "Atualizado ontem."
+
+   // Dias atrás
+   } else if (Math.floor(Difference_In_Days) > 1 && Math.floor(Difference_In_Days) < 30) {
+      return "Última atualização há " + Math.floor(Difference_In_Days) + " dias."
+      
+   // 1 MÊS atrás
+   } else if (Math.floor(Difference_In_Days) >= 30 && Math.floor(Difference_In_Days) < 60) {
+      return "Última atualização há " + Math.floor(Difference_In_Days/30) + " mês."
+      
+   // Vários Meses atrás
+   } else if (Math.floor(Difference_In_Days) >= 60 && Math.floor(Difference_In_Days) < 365) {
+      return "Última atualização há " + Math.floor(Difference_In_Days/30) + " meses."
+   
+   // Primeiro ano.
+   } else if (Math.floor(Difference_In_Days) >= 365 && Math.floor(Difference_In_Days) <= 729) {
+    return "Última atualização há " + Math.floor(Difference_In_Days/360) + " ano"
+   
+   // Demais anos.
+   } else {
+    return "Última atualização há " + Math.floor(Difference_In_Days/360) + " anos"}
+}
+
+// Chama a função e atualiza o elemento de ID js_script
+document.getElementById("js_script").innerHTML = calcDate()
+</script>
 <p><script>document.getElementsByClassName('docs-toc')[0].innerHTML = '<nav id="TableOfContents"><ul>   <li><a href="#resumo">Resumo</a></li>   <ul>      <li><a href="#processos">Tabela de Processos</a></li>      <li><a href="#queue">Fila de Processamento</a></li>   </ul></ul></nav>';</script></p>
 
 
@@ -684,7 +823,7 @@ o processamento de ingredientes.
 
         </div> 
 
-        </div><div class="container-fluid" style="background-image: linear-gradient(white, 50%, transparent), url(/images/footer_bg.png/); background-size: cover; background-position: center center;">
+        </div><div class="container-fluid" style="background-image: linear-gradient(white, 50%, transparent), url(/images/footer_bg.png); background-size: cover; background-position: center center;">
     <footer class="container py-5">
         
         <div class="row">
