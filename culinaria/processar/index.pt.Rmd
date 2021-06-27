@@ -11,7 +11,7 @@ weight: 2
 draft: false
 ---
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r loading-config, echo=FALSE, message=FALSE, warning=FALSE}
 library(shiny)
 library(magrittr)
 library(kableExtra)
