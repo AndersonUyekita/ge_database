@@ -10,64 +10,15 @@ disable_comments: false
 draft: false
 ---
 
-<style>
-body::-webkit-scrollbar {
-  width: 5px;               /* width of the entire scrollbar */
-}
-
-body::-webkit-scrollbar-track {
-  background: transparent;        /* color of the tracking area */
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: transparent;    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid #cccccc;  /* creates padding around scroll thumb */
-}
-
-body::-webkit-scrollbar-thumb:hover {
-  border: 3px solid #9e9e9e;  /* creates padding around scroll thumb */
-}
-</style>
-
-
-<style>
-/* Custom Scrollbar using CSS */
-.custom-scrollbar-css {
-  overflow-y: scroll;
-}
-
-/* scrollbar width */
-.custom-scrollbar-css::-webkit-scrollbar {
-  width: 3px;
-}
-
-/* scrollbar track */
-.custom-scrollbar-css::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* scrollbar handle */
-.custom-scrollbar-css::-webkit-scrollbar-thumb {
-  border-radius: 2rem;
-  background-color: #cccccc;
-}
-
-.custom-scrollbar-css::-webkit-scrollbar-thumb:hover {
-  border: 3px solid #9e9e9e;  /* creates padding around scroll thumb */
-}
-</style>
-
-
-
-
-
-```{r bibliotecas_sources, echo=FALSE, warning=FALSE, message=FALSE}
+```{r bibliotecas-sources, echo=FALSE, warning=FALSE, message=FALSE}
 # Carregando os packages que serão usados.
 library(magrittr)
 library(kableExtra)
 library(shiny)
 library(tidyverse)
+
+# Confuguração dos chunks.
+knitr::opts_chunk$set(echo=FALSE,message=FALSE,warning=FALSE)
 
 # Definindo o path das imagens.
 #path <- "/"
@@ -78,7 +29,7 @@ base::source(file = "../../R/personagens_back_end.R", encoding = "UTF-8")
 base::source(file = "../../R/personagens_front_end.R", encoding = "UTF-8")
 ```
 
-```{r carousel_intro, echo=FALSE, warning=FALSE, message=FALSE}
+```{r carousel-intro, echo=FALSE, warning=FALSE, message=FALSE}
 # Carousel das Cidades de Mondstadt e Liyue
 carousel_wrapper()
 
@@ -86,7 +37,7 @@ carousel_wrapper()
 lead_wrapper(message = "Os personagens jogáveis foram divididos em nações apenas para organização.")
 ```
 
-```{r acesso_bd, echo=FALSE, warning=FALSE, message=FALSE}
+```{r acesso-bd, echo=FALSE, warning=FALSE, message=FALSE}
 # Acessa o Banco de Dados.
 airtable_GET(base = "stats",
              table = "char") -> char_df

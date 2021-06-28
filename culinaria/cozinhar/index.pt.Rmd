@@ -1,24 +1,621 @@
 ---
-title: Cozinhar
+title: "Cozinhar"
 author: ''
 date: '2021-06-18'
 slug: []
 categories: []
 tags: []
 disableReadmoreNav: true
+disable_comments: false
 weight: 1
+draft: false
 ---
 
+```{r loading-config,echo=FALSE,message=FALSE,warning=FALSE}
+# Libraries que serão usados no documento.
+library(shiny)
+library(magrittr)
+library(kableExtra)
+library(tidyverse)
 
+# Confuguração dos chunks.
+knitr::opts_chunk$set(echo=FALSE,message=FALSE,warning=FALSE)
 
+# Configuração do path para este específico chunk.
+setwd("C:/Users/andersonuyekita/Documents/GE_BR/database/")
 
+# R Scripts
+base::source("./R/default.R", encoding = "UTF-8")
+```
 
+```{r}
+hero_img(titulo = "Cozinhar",
+         lead_message = tagList("Crie alimentos para regenerar pontos de vida e alimentos que possam conferir ao seu personagens vantagens competitivas, tais como adicional de ATK, adicional de Taxa crítica, adicional de DEF etc..")
+         )
+```
 
+```{r resumo}
+resumo_wrapper(lista = tags$ul(
+             tags$li("Há 3 (três) níveis de preparação dos pratos que não dependem do personagem escolhido como o cozinheiro;"),
+             tags$li("Há pratos que serão necessários a obtenção prévia das receitas;"),
+             tags$li("Pratos de rankings mais elevadores requerem ingredientes mais raros e em maior quantidade;"),
+             tags$li("A proficiência só afeta o autocozinhar, e;"),
+             tags$li("A escolha do personagem que será o cozinho é fundamental para se obter pratos especiais.")
+             ))
+```
 
+A venda de itens no mundo de Teyvat possui um limite de oferta que é *resetado* a cada tempo, pode ser diário, a cada 3 dias ou semanal (mais detalhes na <a href="/shops">Seção de Lojas</a>). Devido a essa limitação de compra dos itens de regeneração de vida ou de *buffs*, a jornada por Teyvat pode ser interrompida por falta de HP.
 
+Embora se possa regenerar os pontos de vidas nas estátuas isso não é muito prático quando se está longe delas. Desta forma, a preparação de `pratos` vem para suprir essa necessidade de regeneradores de vidas e de *buffs* para uso imediato. Esses `pratos` podem conferir ao usuário diversos atributos, bem como regenerar pontos de vida (mais detalhes na <a href="/culinaria/dishes">Seção de Pratos</a>).
 
-TO-DO:
+<h3 id="cozinhar" class="header_toc">Cozinhar</h5>
 
-- [ ] Ligar fogueira
-- [ ] Quantidade de pratos
-- [ ] Localidade das fogueiras
+A opção de cozinhar no mecanismo de culinária é uma alusão ao tempo de cocção do prato na vida real, caso o prato seja preparado antes tempo ou muito depois do tempo ideal os seus efeitos não serão maximizados. A figura abaixo possui um *screenshot* do jogo do mecanismo de `cozinhar`.
+
+```{r carousel-cooking}
+
+carousel_n_images(
+  single = TRUE,
+  id = "0",
+  url_list = list("1_1_cooking.png", "1_2_cooking.png"),
+  alt_list = list("...", "...")
+  )
+```
+
+O ponteiro simula o tempo de cocção do prato e cabe ao jogador clicar em **Parar** para determinar o ponto desejado de preparação do prato. As figuras abaixo mostram os resultados de cada nível de preparação do prato.
+
+```{r cooking-preparation-lvl}
+carousel_n_images(
+  single = TRUE,
+  id = "1",
+  url_list = list("2_1_concluido.png",
+                  "2_2_sucesso.png",
+                  "2_3_perfeito.png"),
+  alt_list = list("...", "...", "..."))
+```
+
+Embora o mini-game da culinária seja divertido no início do jogo, no longo prazo isso se torna irritante ao ter que cozinhar unitariamente os pratos. 
+
+```{r alert-cooking}
+# SUCCESS ALERT do Nível de Preparação
+alert_icon(type = "warning",
+           message = tagList(
+               "A possibilidade de ", tags$code("autocozinhar"), "será desbloqueado somente após a obtenção da", tags$code("proficiência",".")
+               )
+           )
+```
+
+<h5 id="qualidade" class="header_toc">Nível de preparação</h5>
+
+De acordo com cada um dos níveis de preparação que são governados pelo mecanisco de ponteiro de `cozinhar`, haverá três pratos que diferem somente nos valores dos seus efeitos. Além disso, a distinção entre os pratos se dará pela imagem do prato que também serão diferentes:
+
+* **Concluído:** Resultará num prato `Esquisito`;
+* **Sucesso:** Resultará num prato `Normal`, e;
+* **Perfeito:** resultará num prato `Delicioso`.
+
+A Figura abaixo mostra as 3 (três) formas de preparo:
+
+```{r carousel-preparation-lvl}
+carousel_n_images(
+  single = TRUE,
+  id = "2",
+  url_list = list("3_1_suspicious.png",
+                  "3_2_normal.png",
+                  "3_3_delicious.png"),
+  alt_list = list("Nível de preparação Concluído que resulta em pratos Esquisitos.",
+                  "Nível de preparação Sucesso que resulta em pratos Normais.",
+                  "Nível de preparação Perfeito que resulta em pratos Deliciosos."))
+```
+
+Há um quarto nível de preparação que depende do personagem selecionado como `cozinheiro`, esse prato é chamado de especialidade ou de prato especial.
+
+```{r alert-dish-quality}
+# SUCCESS ALERT do Nível de Preparação
+alert_icon(type = "success",
+           message = tagList(
+               "Busque cozinhar pratos", tags$strong("perfeitos"), "para maximizar os efeitos e otimizar o consumo de ingredientes."
+           ))
+```
+
+<h5 id="pratos_iniciais" class="header_toc">Pratos Iniciais</h5>
+
+Inicialmente Aether e Lumine já começam o jogo com 9 pratos em seu "cardápio" que são básicos e suficientes para o início da jornada.
+
+```{r single-img-standard-recipes}
+single_img_75(path = "4_1_standard_recipes.png",
+              alt_ = "Lista de ingredientes que podem ser processados.")
+```
+
+A lista de pratos que podem ser feitos já no início do jogo:
+
+```{r standard-recipes-table}
+tags$table(class="table table-striped table-hover",
+           style="margin-left: auto; margin-right: auto; table-layout: fixed;",
+           tags$thead(
+                tags$tr(
+                    tags$th(style="text-align: center; vertical-align: middle;",
+                        "Receita"),
+                    tags$th(style="text-align: center; vertical-align: middle;",
+                        "Nível da receita"),
+                    tags$th(style="text-align: center; vertical-align: middle;",
+                        "Efeito")
+                )
+           ),
+           tags$tbody(
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Espeto de Frango com Cogumelos"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"))),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Restaura 8% ~ 10% de Vida e um adicional de 800 ~ 1200 de Vida ao personagem selecionado.")
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Ovo Frito de Teyvat"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"))),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Regenera o Personagem selecionado. Restaura 50 ~ 150 de Vida.")
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Sopa de Rabanete e Vegetais"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"))),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Restaura 8% ~ 10% de Vida Máxima ao Personagem selecionado. Regenera 210 ~ 300 de Vida a cada 5s por 30s.")
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Bife"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"))),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Regenera o Personagem selecioando. Restaura 50 ~ 150 de Vida.")
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Peixe Grelhado de Mondstadt"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"))),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Restaura 8% ~ 10% de Vida e um adicional de 800 ~ 1200 de Vida ao personagem selecionado.")
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Frango Assado com Mel"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true"))),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Restaura 20% ~ 24% de Vida e um adicional de 900 ~ 1500 de Vida ao personagem selecionado.")
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Bolinhas de Rabanete Fritas"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true"))),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Aumenta o ATQ de todos os membros da Equipe em 66-95 por 300s. No modo multijogador, o efeito apenas se aplica ao seu personagem.")
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Salada Saudável"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true"))),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Aumenta a Taxa CRIT de todos os personagens na equipe em 6% ~ 12% por 300s. No modo multijogador, o efeito apenas se aplica ao seu personagem.")
+                ),
+                tags$tr(
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Pão de Pescador"),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true"))),
+                    tags$td(style="text-align: center; vertical-align: middle;",
+                            "Aumenta a DEF de todos os personagens na equipe em 88 ~ 126 por 300s. No modo multijogador, o efeito apenas se aplica ao seu personagem.")
+                )
+           ))
+```
+
+Embora esses pratos sejam práticos no início do jogo, para fases mais avançadas do jogo será necessário regeneradores e *buffs* com **melhores efeitos**, estes últimos necessitam do aprendizado das `receitas`.
+
+```{r alert-pratos-iniciais}
+# SUCCESS ALERT do Nível de Preparação
+alert_icon(type = "warning",
+           message = tagList(
+               "Os pratos iniciais não precisam de ", tags$strong("receita"), ", basta encontrar os ingredientes e prepará-los."
+           ))
+```
+
+<h5 id="recipes" class="header_toc">Receitas</h5>
+
+Conforme já mencionado, a maioria dos pratos de Genshin Impact requer o **aprendizado do prato** a partir das `receitas`. A Figura abaixo mostra uma receita que ainda não foi aprendida.
+
+```{r single-img-dish-and-recipes}
+single_img_75(path = "5_1_learn.png", alt_ = "...")
+```
+
+Ao todo são 88 receitas disponíveis no jogo que ensinam Aether e Lumine a criarem pratos que variam de rankings de 1 até 5 estrelas. Os `pratos` de *rankings* superiores necessitam de uma maior quantidade de ingredientes, além de disso, alguns dos ingredientes podem precisar passar pelo `processamento` de ingredientes.
+
+```{r alert-dish-and-recipes}
+# SUCCESS ALERT do Nível de Preparação
+alert_icon(type = "warning",
+           message = tagList(
+               "As receitas devem ser ", tags$strong("aprendidas"), " antes de prepará-las."
+           ))
+```
+
+A figura abaixo mostra alguns exemplos de pratos:
+
+```{r carousel-dish-lvl}
+carousel_n_images(
+  single = TRUE,
+  id = "3",
+  url_list = list("6_1_recipe.png", "6_2_recipe.png", "6_3_recipe.png", "6_4_recipe.png", "6_5_recipe.png"),
+  alt_list = list("...","...","...","...","...")
+  )
+```
+
+Para maiores informações acerca dos pratos, acesse a Página de Pratos e Receitas.
+
+```{r call-reference-recipe}
+call_reference(path_png = "thumb_recipe.png",
+               path_url = "/ingredients",
+               alt_ = "Imagem",
+               nome_section = "Página de Receitas",
+               mensagem = "Acesse para ter mais informações e detalhes.")
+```
+
+<h5 id="ingredients" class="header_toc">Ingredientes</h5>
+
+Os ingredientes são os insumos básicos para `cozinhar` eles são itens coletáveis dos cenários do jogo que podem ser obtidos de diversas maneiras, desde itens que podem ser obtidos através dos animais vivos (javalis, pássaros, peixes etc.), bem como podem ser recolhidos espalhados nos campos (ovos de pássaro, cogumelos, frutas etc.). Além disso, eles podem ser parte de recompensas de missões.
+
+Note que muitos ingredientes são vendidos por NPC's espalhados por toda Teyvat, mas a oferta desses ingredientes possui um **limite** que é renovado de tempo em tempo, sendo assim necessário esperar por algumas horas ou dias para o limite de compra ser *resetado*.
+
+Para maiores informações acerca das receitas, acesse a Página de Pratos e Receitas.
+
+```{r call-reference-ingredients}
+call_reference(path_png = "thumb_ingredients.png",
+               path_url = "/recipes",
+               alt_ = "Imagem",
+               nome_section = "Página de Ingredientes",
+               mensagem = "Acesse para ter mais informações e detalhes.")
+```
+
+<h5 id="proficiencia" class="header_toc">Proficiência</h5>
+
+A proficiência é necessária apenas para habilitar o `autocozinhar`, a condição para obter a proficiência é a preparação de um certo número de pratos `perfeitos`. De acordo com o nível do prato haverá uma maior necessidade de pratos `perfeitos`.
+
+```{r table-cook-proficiency}
+tags$table(class="table table-striped table-hover",
+           style="margin-left: auto; margin-right: auto; table-layout: fixed;",
+           tags$thead(
+                tags$tr(
+                    tags$th(style="text-align: center; vertical-align: middle;",
+                        "Nível da Receita"),
+                    tags$th(style="text-align: center; vertical-align: middle;",
+                        "Quantidade de Pratos Perfeitos")
+                )
+           ),
+           tags$tbody(
+                tags$tr(
+                    tags$td(
+                        tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"))
+                    ),
+                    tags$td(style="text-align: center; vertical-align: middle;","5")
+                ),
+                tags$tr(
+                    tags$td(
+                        tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true"))
+                    ),
+                    tags$td(style="text-align: center; vertical-align: middle;","10")
+                ),
+                tags$tr(
+                    tags$td(
+                        tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true"))
+                    ),
+                    tags$td(style="text-align: center; vertical-align: middle;","15")
+                ),
+                tags$tr(
+                    tags$td(
+                        tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true"))
+                    ),
+                    tags$td(style="text-align: center; vertical-align: middle;","20")
+                ),
+                tags$tr(
+                    tags$td(
+                        tags$span(tags$i(class="fa fa-star", `aria-hidden`="true"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true"),
+                                  tags$i(class="fa fa-star", `aria-hidden`="true"))
+                    ),
+                    tags$td(style="text-align: center; vertical-align: middle;","25")
+                )
+           )) -> recipe_table
+
+recipe_table
+```
+
+```{r alert-proficiency}
+# WARNING ALERT do Nível de Preparação
+alert_icon(type = "warning",
+           message = tagList(
+              tags$span("Somente os pratos",
+                        tags$strong("perfeitos"),
+                        "serão contabilizados para a proficiência.")
+              )
+           )
+```
+
+<h5 id="autocozinhar" class="header_toc">Autocozinhar</h5>
+
+A opção de `Autocozinhar` será desbloqueada somente após a obtenção da `proficiência`, essa opção possibilita a preparação de até **99 pratos** de uma vez só. Cabe ressaltar que os bônus concedidos pelos `cozinheiros` continuam valendo para essa forma de cozinhar.
+
+```{r carousel-autocook}
+carousel_n_images(
+      
+        # Definição de ID.
+        id = "carousel6",
+        
+        single = TRUE,
+        
+        # Endereços das imagens.
+        url_list = list("7_1_autocook.png",
+                        "7_2_autocook.png"),
+        
+        # Alt de cada uma das imagens.
+        alt_list = list("...",
+                        "...")
+        )
+```
+
+No exemplo acima, foram preparados 5 pratos automaticamente, destes 4 foram `Deliciosos` e 1 foi `Prato Especial`.
+
+```{r alert-warning-autocook}
+# SUCCESS ALERT do Nível de Preparação
+alert_icon(type = "warning",
+           message = tagList(
+              tags$span(
+                  "Não há como cancelar o",
+                  tags$strong("autocozinhar"),
+                  ", pois o processo é instantâneo."
+              ))
+           )
+```
+
+```{r alert-success-autocook}
+# SUCCESS ALERT do Nível de Preparação
+alert_icon(type = "success",
+           message = tagList(
+              "Após a obtenção da proficiência não perca o seu tempo cozinhando, use o ",
+              tags$strong("autocozinhar")," e continue desfrutando dos ",
+              tags$strong("bônus dos cozinheiros"),".")
+           )
+```
+
+<h5 id="bonus" class="header_toc">Bônus de Personagem</h5>
+
+A escolha do personagem que será o `cozinheiro` determina o tipo de bônus. Caso seja selecionado personagens que possuam Talentos Passivos na preparação de pratos haverá uma possibilidade de gerar pratos em uma maior quantidade, no entanto, caso seja selecionado um personagem que produza um prato especial, haverá a possibilidade de obter um prato com efeitos superiores.
+
+Atualmente há 7 personagens que possuem o Talento Passivo que aumenta a produção de pratos quando eles são produzidos no nível máximo de perfeição.
+
+* Barbara: Probabilidade de 12% de gerar em dobro pratos que regeneram pontos de vida quando a preparação for perfeita;
+* Diona: Probabilidade de 12% de gerar em dobro pratos que regeneram pontos de vida quando a preparação for perfeita;
+* Hu-tao: Probabilidade de 18% de gerar um prato esquisito quando a preparação for perfeita;
+* Jean: Probabilidade de 12% de gerar em dobro pratos que regeneram pontos de vida quando a preparação for perfeita;
+* Noelle: Probabilidade de 12% de gerar em dobro pratos que aumentam a DEF quando a preparação for perfeita;
+* Xiangling: Probabilidade de 12% de gerar em dobro pratos que aumentam o ATK quando a preparação for perfeita, e;
+* Xinyan: Probabilidade de 12% de gerar em dobro pratos que aumentam a DEF quando a preparação for perfeita.
+
+A figura abaixo mostra a escolha da `Diona` para a produção do **Espeto de Frango com Cogumelos**.
+
+```{r single-img-production-bonus}
+single_img_75(path = "8_1_production_bonus.png", alt_ = "...")
+```
+
+Note que `Diona` concede um bônus 12% de produção e dobro caso a preparação seja perfeita. Caso seja utlizado o `Kaeya` para produzir esse mesmo **Espeto de Frango com Cogumelos**, ele concedirá uma probabilidade de produção de um prato especial. A figura abaixo mostra o prato produzido por `Kaeya.`
+
+```{r single-img-special-dish}
+carousel_n_images(
+  single = TRUE,
+  id = "7",
+  url_list = list("9_1_special_dish.png", "9_2_special_dish.png"),
+  alt_list = list("...", "...")
+  )
+```
+
+Observe que o prato especial de **Espeto de Frango com Cogumelos** feito por `Kaeya` é bem superior ao `Delicioso`.
+
+```{r table-special-dish-comparison}
+tags$table(class="table table-striped table-hover",
+           style="margin-left: auto; margin-right: auto; table-layout: fixed;",
+           tags$thead(
+               tags$tr(
+                   tags$th(style="text-align: center; vertical-align: middle;",
+                           "Nível de Preparação"),
+                   tags$th(style="text-align: center; vertical-align: middle;",
+                           "Efeito base"),
+                   tags$th(style="text-align: center; vertical-align: middle;",
+                           "Efeito adicional")
+                   
+               )
+           ),
+           tags$tbody(
+               tags$tr(
+                   tags$td(style="text-align: center; vertical-align: middle;","Esquisito"),
+                   tags$td(style="text-align: center; vertical-align: middle;","8%"),
+                   tags$td(style="text-align: center; vertical-align: middle;","800")),
+               tags$tr(
+                   tags$td(style="text-align: center; vertical-align: middle;","Normal"),
+                   tags$td(style="text-align: center; vertical-align: middle;","9%"),
+                   tags$td(style="text-align: center; vertical-align: middle;","1000")),
+               tags$tr(
+                   tags$td(style="text-align: center; vertical-align: middle;","Delicioso"),
+                   tags$td(style="text-align: center; vertical-align: middle;","10%"),
+                   tags$td(style="text-align: center; vertical-align: middle;","1200")),
+               tags$tr(
+                   tags$td(style="text-align: center; vertical-align: middle;","Prato Especial"),
+                   tags$td(style="text-align: center; vertical-align: middle;","16%"),
+                   tags$td(style="text-align: center; vertical-align: middle;","1350"))
+               )
+           )
+
+```
+
+```{r alert-warning-special-dishes}
+# SUCCESS ALERT do Nível de Preparação
+alert_icon(type = "warning",
+           message = tagList(
+              "Não se esqueça de selecionar o",
+              tags$code("cozinheiro"),
+              " para desfrutar dos bônus.")
+           )
+```
+
+```{r post_details}
+# Dados da publicação
+day <- 24
+month <- 06
+year <- 2021
+version <- 1.6
+
+# Criação das datas
+full_date <- sprintf("%s/%s/%s",day,month,year)
+full_date_js <- sprintf("%s,%s,%s", year, month, day)
+
+tagList(
+   tags$div(class="container-fluid",
+      tags$ul(
+         tags$li("Inserir localidades das fogueiras e fogões")
+      ),
+      tags$p("Progresso"),
+      tags$div(class="progress",
+      tags$div(class="progress-bar",
+               role="progressbar",
+               style="width: 90%;",
+               `aria-valuenow`="90",
+               `aria-valuemin`="0",
+               `aria-valuemax`="100",
+               "90%"))
+      )
+) -> progresso
+
+# Esse Wrapper cria uma caixa de detalhes da publicação.
+
+# Cria um Card com figura lateral.
+tags$div(class="card mb-3",
+         style="max-width: 100%; margin-top: 4rem;",
+   tags$div(class="row no-gutters",
+      # DIV da IMG
+      tags$div(class="col-md-4",
+         # Imagem do Hilichurls
+         tags$img(class="card-img",
+                  src="../../author.png",
+                  alt="Hilichurls Scholar")),
+      # DIV de conteúdo
+      tags$div(class="col-md-8",
+         # Cria um outro Card para comportar as Navbars
+         tags$div(class="card-body",
+                  style="padding: 0px;",
+            tags$div(class="card text-justify",
+                     style="border:0px;",
+               # NAVBARS
+               tags$div(class="card-header",
+                  tags$ul(class="nav nav-tabs card-header-tabs",
+                     # Dados de Publicação
+                     tags$li(class="nav-item",
+                        tags$a(class="nav-link active",
+                               id="publication_info-tab",
+                               `data-toggle`="tab",
+                               href="#publication_info",
+                               role="tab",
+                               `aria-controls`="publication_info",
+                               `aria-selected`="true",
+                               "Dados de Publicação")),
+                     # Progresso
+                     tags$li(class="nav-item",
+                        tags$a(class="nav-link",
+                               id="progress-tab",
+                               `data-toggle`="tab",
+                               href="#progress",
+                               role="tab",
+                               `aria-controls`="progress",
+                               `aria-selected`="false",
+                               "Progresso")))),
+               # Conteúdos dos TABS
+               tags$div(class="tab-content",
+                        style="margin: 1rem;",
+                  # Dados da Publicação
+                  tags$div(class="tab-pane fade show active",
+                           id="publication_info",
+                           role="tabpanel",
+                           `aria-labelledby`="publication_info-tab",
+                           # Título
+                           tags$h5(class="card-title",
+                                   "Hilichurls Scholar's Team"),
+                           # Texto padrão.
+                           tags$p(class="card-text",
+                                  "É o time dedicado na atualização dos dados do Genshin Impact."),
+                           # Dados da publicação.
+                           tags$ul(
+                              tags$li(sprintf("Data da publicação: %s", full_date)),
+                              tags$li(sprintf("Versão do Jogo: %s", version))
+                           )),
+                  # Progresso
+                  tags$div(class="tab-pane fade",
+                           id="progress",
+                           role="tabpanel",
+                           `aria-labelledby`="progress-tab",
+                           progresso)))))),
+   tags$div(class="card-footer",
+      tags$small(class="text-muted",
+                 id="js_script"
+                 )))
+
+```
+
+<script>
+var date = "`r full_date_js`"
+
+// Chama a função e atualiza o elemento de ID js_script
+document.getElementById("js_script").innerHTML = calcDate()
+</script>
+
+```{r creating-toc}
+# Criação da sequência do TOC.
+'<nav id="TableOfContents">
+<ul>
+   <li><a href="#resumo">Resumo</a></li>
+   <li><a href="#cozinhar">Cozinhar</a></li>
+   <ul>
+   
+      <li><a href="#dish_quality">Nível de preparação</a></li>
+      <li><a href="#pratos_iniciais">Pratos Iniciais</a></li>
+      <li><a href="#recipes">Pratos e Receitas</a></li>
+      <li><a href="#ingredients">Ingredientes</a></li>
+      <li><a href="#proficiencia">Proficiência</a></li>
+      <li><a href="#autocozinhar">Autocozinhar</a></li>
+      <li><a href="#bonus">Bônus de Personagem</a></li>
+   </ul>
+</ul>
+</nav>' -> toc_in_text
+
+# É necessário retirar todos os espaços em brancos: Return Carriage e Nova linhas.
+# Se não fizer isso dá problema na exibição do HTML no TOC.
+toc_in_text <- gsub("[\r\n]", "", toc_in_text)
+
+# Atualiza o TOC
+# JS Script utilizado para atualizar a DIV docs-toc
+tags$script(HTML(sprintf("document.getElementsByClassName('docs-toc')[0].innerHTML = '%s';", toc_in_text)))
+```
