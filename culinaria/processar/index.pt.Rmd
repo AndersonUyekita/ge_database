@@ -11,13 +11,13 @@ weight: 2
 draft: false
 ---
 
-```{r loading-config, echo=FALSE, message=FALSE, warning=FALSE}
+```{r loading-config,echo=FALSE,message=FALSE,warning=FALSE}
 library(shiny)
 library(magrittr)
 library(kableExtra)
 library(tidyverse)
 
-# Confuguração dos chunks.
+# Configuração dos chunks.
 knitr::opts_chunk$set(echo=FALSE,message=FALSE,warning=FALSE)
 
 # Habilitar para usar o popover
@@ -42,7 +42,7 @@ $(document).ready(function(){
 });
 ```
 
-```{r hero}
+```{r hero-img}
 
 hero_img(titulo = "Processar",
          lead_message = tags$span("O processamento de alimentos é necessário para a",
@@ -85,7 +85,7 @@ alert_icon(type = "warning",
            )
 ```
 
-<h5 id="processos" class="genshin_font" style="padding-top: 90px; margin-top: -90px;">Tabela de Processos de Ingredientes</h5>
+<h5 id="processos" class="header_toc">Tabela de Processos de Ingredientes</h5>
 
 A tabela abaixo apresenta um resumo para a produção do produto desejado e a sua respectiva quantidade de ingredientes. 
 
@@ -404,7 +404,7 @@ var date = "`r full_date_js`"
 
 ```{js}
 // Função para calcula a diferença entre a data de publicação e de leitura.
-function calcDate() {
+function calcDate(date) {
    
    // Inicialização das variáveis.
    var date1 = new Date(date);  // Publicacao -> 0: Janeiro, 1: Fevereiro ... 11: Dezembro
@@ -449,7 +449,7 @@ function calcDate() {
 }
 
 // Chama a função e atualiza o elemento de ID js_script
-document.getElementById("js_script").innerHTML = calcDate()
+document.getElementById("js_script").innerHTML = calcDate(date)
 ```
 
 ```{r creating-toc}

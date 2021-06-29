@@ -319,32 +319,6 @@
 
 
 
-<style>
-
-kbd.anemo {
-    padding: .1rem .3rem;
-    background-color: #32d7a0;
-    color: #1c1c22;
-}
-
-</style>
-<style>
-
-kbd {
-    padding: .1rem .3rem;
-    background-color: #d3bc8e;
-    color: #1c1c22;
-}
-
-.table th {
-    border-top: 0px;
-}
-
-p {
-text-align: justify;
-}
-
-</style>
 <div id="carouselExampleCaptions" class="carousel slide" style="margin-bottom: 1.0rem;" data-ride="carousel">
 <ol class="carousel-indicators">
 <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -561,55 +535,9 @@ Processar
 </div>
 <script>
 var date = "2021,6,25"
-</script>
-<script type="text/javascript">
-// Função para calcula a diferença entre a data de publicação e de leitura.
-function calcDate() {
-   
-   // Inicialização das variáveis.
-   var date1 = new Date(date);  // Publicacao -> 0: Janeiro, 1: Fevereiro ... 11: Dezembro
-   var date2 = new Date();            // HOJE
-    
-   // To calculate the time difference of two dates
-   var Difference_In_Time = date2.getTime() - date1.getTime();
-    
-   // To calculate the no. of days between two dates
-   var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-    
-   // Para conferir os dias! Tire o comentário para avaliar.
-   //document.write(Difference_In_Days)
-    
-   // HOJE
-   if (Math.floor(Difference_In_Days) == 0) {
-      return "Atualizado hoje."
-      
-   // ONTEM
-   } else if (Math.floor(Difference_In_Days) == 1) {
-      return "Atualizado ontem."
-
-   // Dias atrás
-   } else if (Math.floor(Difference_In_Days) > 1 && Math.floor(Difference_In_Days) < 30) {
-      return "Última atualização há " + Math.floor(Difference_In_Days) + " dias."
-      
-   // 1 MÊS atrás
-   } else if (Math.floor(Difference_In_Days) >= 30 && Math.floor(Difference_In_Days) < 60) {
-      return "Última atualização há " + Math.floor(Difference_In_Days/30) + " mês."
-      
-   // Vários Meses atrás
-   } else if (Math.floor(Difference_In_Days) >= 60 && Math.floor(Difference_In_Days) < 365) {
-      return "Última atualização há " + Math.floor(Difference_In_Days/30) + " meses."
-   
-   // Primeiro ano.
-   } else if (Math.floor(Difference_In_Days) >= 365 && Math.floor(Difference_In_Days) <= 729) {
-    return "Última atualização há " + Math.floor(Difference_In_Days/360) + " ano"
-   
-   // Demais anos.
-   } else {
-    return "Última atualização há " + Math.floor(Difference_In_Days/360) + " anos"}
-}
 
 // Chama a função e atualiza o elemento de ID js_script
-document.getElementById("js_script").innerHTML = calcDate()
+document.getElementById("js_script").innerHTML = calcDate(date)
 </script>
 <p><script>document.getElementsByClassName('docs-toc')[0].innerHTML = '<nav id="TableOfContents"><ul>   <li><a href="#resumo">Resumo</a></li>   <ul>      <li><a href="#culinaria">Culinária</a></li>      <li><a href="#cozinhar">Cozinhar</a></li>      <li><a href="#processar">Processar</a></li>   </ul></ul></nav>';</script></p>
 

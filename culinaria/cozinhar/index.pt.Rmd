@@ -28,7 +28,7 @@ setwd("C:/Users/andersonuyekita/Documents/GE_BR/database/")
 base::source("./R/default.R", encoding = "UTF-8")
 ```
 
-```{r}
+```{r hero-img}
 hero_img(titulo = "Cozinhar",
          lead_message = tagList("Crie alimentos para regenerar pontos de vida e alimentos que possam conferir ao seu personagens vantagens competitivas, tais como adicional de ATK, adicional de Taxa crítica, adicional de DEF etc..")
          )
@@ -134,7 +134,7 @@ tags$table(class="table table-striped table-hover",
            tags$thead(
                 tags$tr(
                     tags$th(style="text-align: center; vertical-align: middle;",
-                        "Receita"),
+                        "Prato"),
                     tags$th(style="text-align: center; vertical-align: middle;",
                         "Nível da receita"),
                     tags$th(style="text-align: center; vertical-align: middle;",
@@ -223,7 +223,7 @@ tags$table(class="table table-striped table-hover",
 
 Embora esses pratos sejam práticos no início do jogo, para fases mais avançadas do jogo será necessário regeneradores e *buffs* com **melhores efeitos**, estes últimos necessitam do aprendizado das `receitas`.
 
-```{r alert-pratos-iniciais}
+```{r alert-warning-pratos-iniciais}
 # SUCCESS ALERT do Nível de Preparação
 alert_icon(type = "warning",
            message = tagList(
@@ -241,7 +241,7 @@ single_img_75(path = "5_1_learn.png", alt_ = "...")
 
 Ao todo são 88 receitas disponíveis no jogo que ensinam Aether e Lumine a criarem pratos que variam de rankings de 1 até 5 estrelas. Os `pratos` de *rankings* superiores necessitam de uma maior quantidade de ingredientes, além de disso, alguns dos ingredientes podem precisar passar pelo `processamento` de ingredientes.
 
-```{r alert-dish-and-recipes}
+```{r alert-warning-dish-and-recipes}
 # SUCCESS ALERT do Nível de Preparação
 alert_icon(type = "warning",
            message = tagList(
@@ -347,7 +347,7 @@ tags$table(class="table table-striped table-hover",
 recipe_table
 ```
 
-```{r alert-proficiency}
+```{r alert-warning-proficiency}
 # WARNING ALERT do Nível de Preparação
 alert_icon(type = "warning",
            message = tagList(
@@ -589,7 +589,7 @@ tags$div(class="card mb-3",
 var date = "`r full_date_js`"
 
 // Chama a função e atualiza o elemento de ID js_script
-document.getElementById("js_script").innerHTML = calcDate()
+document.getElementById("js_script").innerHTML = calcDate(date)
 </script>
 
 ```{r creating-toc}

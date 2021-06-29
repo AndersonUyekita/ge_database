@@ -418,7 +418,7 @@ O processamento de alimentos
 </div>
 </div>
 </div>
-<h5 id="processos" class="genshin_font" style="padding-top: 90px; margin-top: -90px;">
+<h5 id="processos" class="header_toc">
 Tabela de Processos de Ingredientes
 </h5>
 <p>A tabela abaixo apresenta um resumo para a produção do produto desejado e a sua respectiva quantidade de ingredientes.</p>
@@ -754,7 +754,7 @@ var date = "2021,6,25"
 </script>
 <script type="text/javascript">
 // Função para calcula a diferença entre a data de publicação e de leitura.
-function calcDate() {
+function calcDate(date) {
    
    // Inicialização das variáveis.
    var date1 = new Date(date);  // Publicacao -> 0: Janeiro, 1: Fevereiro ... 11: Dezembro
@@ -799,7 +799,7 @@ function calcDate() {
 }
 
 // Chama a função e atualiza o elemento de ID js_script
-document.getElementById("js_script").innerHTML = calcDate()
+document.getElementById("js_script").innerHTML = calcDate(date)
 </script>
 <p><script>document.getElementsByClassName('docs-toc')[0].innerHTML = '<nav id="TableOfContents"><ul>   <li><a href="#resumo">Resumo</a></li>   <ul>      <li><a href="#processos">Tabela de Processos</a></li>      <li><a href="#queue">Fila de Processamento</a></li>   </ul></ul></nav>';</script></p>
 

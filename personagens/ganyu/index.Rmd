@@ -7,8 +7,8 @@ categories: []
 tags:
   - ganyu
 disableReadmoreNav: yes
+disable_comments: yes
 ---
-
 
 ```{r libraries_sources, echo=FALSE, warning=FALSE, message=FALSE}
 
@@ -21,22 +21,26 @@ library(ggplot2)
 library(ggplotify)
 library(plotly)
 
+# Configuração dos chunks.
+knitr::opts_chunk$set(echo=FALSE,message=FALSE,warning=FALSE)
+
 # Scripts
 base::source(file = "../../../R/personagens_back_end.R", encoding = "UTF-8")
 base::source(file = "../../../R/personagens_front_end.R", encoding = "UTF-8")
+base::source(file = "../../../R/default.R", encoding = "UTF-8")
 
 # Personagem
 personagem <- tail(strsplit(getwd(), "/")[[1]], n = 1)
 
 ```
 
-```{r acesso_db, echo=FALSE, warning=FALSE, message=FALSE}
+```{r acesso_db}
 
 # Acesso ao Banco de Dados do Airtable.
 # Tabela stats
-airtable_GET(base="stats",
-             table = "stats",
-             filter = paste0("?filterByFormula=name%3D%22", personagem,"%22")) -> stats
+#airtable_GET(base="stats",
+#             table = "stats",
+#             filter = paste0("?filterByFormula=name%3D%22", personagem,"%22")) -> stats
 
 # Acesso ao Banco de Dados do Airtable.
 # Tabela char
@@ -44,24 +48,48 @@ airtable_GET(base = "stats",
              table = "char") -> char_table
 ```
 
-```{r ficha_tecnica, echo=FALSE, warning=FALSE, message=FALSE}
+```{r ficha_tecnica}
 # Ficha Técnica
 ficha_tecnica_front(name_ = personagem, df_char_table = char_table)
 ```
 
-<a name="atributos"><h2 style="padding-top: 60px; margin-top: -60px;" class="genshin_font">Atributos</h2></a>
+<h5 id="atributos" class="header_toc">Atributos</h3>
 
-```{r, echo=FALSE}
-tags$button(type="button",
-            class="btn btn-primary",
-            `data-toggle`="modal",
-            `data-target`="#exampleModal",
-            "Detalhes")
+A tabela abaixo mostra os atributos dos marcos mais importantes de `r stringr::str_to_title(personagem)` que são os primeiros os seus últimos níveis de cada Ascension Level.
+
+```{r atributes-table}
+df_stats <- read_csv(file = "../../../../stats.csv")
+
+df_stats %>%
+    dplyr::filter(name == personagem) %>%
+    dplyr::select(-c("id", name)) %>% 
+    filter(lvl %in% c(1,20,40,50,60,70,80,90)) %>%
+    kableExtra::kbl() %>%
+    kableExtra::kable_styling(
+        bootstrap_options = c("hover",
+                              "striped",
+                              "condensed")
+    )
 ```
 
-```{r, echo=FALSE}
+Caso você queira visualizar os dados de maneira gráfica clique no botão abaixo. Note que os valores são aproximados e podem variar em 1 unidade para mais ou para menos devido ao arredondamento.
+
+```{r reference-modal}
+call_modal(path_png = "/images/thumb_graph.png",
+               alt_ = "Imagem",
+               nome_section = "Gráfico de Atributos",
+               mensagem = tagList(tags$p("Clique no botão para ver os detalhes."),
+                                  tags$button(type="button",
+                                     class="btn btn-primary",
+                                     `data-toggle`="modal",
+                                     `data-target`="#modal_atributos",
+                                     "Detalhes")
+               ))
+```
+
+```{r modal-content}
 tags$div(class="modal fade",
-         id="exampleModal",
+         id="modal_atributos",
          `data-keyboard`="false",
          tabindex="-1",
          `aria-labelledby`="staticBackdropLabel",
@@ -71,7 +99,7 @@ tags$div(class="modal fade",
             tags$div(class="modal-header",
                 tags$h5(class="modal-title",
                         id="staticBackdropLabel",
-                        "Modal title"),
+                        stringr::str_to_title(personagem)),
                 tags$button(type="button",
                             class="close",
                             `data-dismiss`="modal",
@@ -83,25 +111,126 @@ tags$div(class="modal fade",
             tags$div(class="modal-body",
                 tags$iframe(class="flexdashboard",
                             src=sprintf("./flexdashboard_%s.html", personagem),
-                            style="width:100%; height:95vh;")
-                ),
-            tags$div(class="modal-footer",
-                tags$button(type="button",
-                            class="btn btn-secondary",
-                            `data-dismiss`="modal",
-                            "Close"),
-                tags$button(type="button",
-                            class="btn btn-primary",
-                            "Understood"))
+                            style="width:100%; height:75vh;")
+                )
         )
+    )
+)
+
+```
+
+<h5 id="talentos" class="header_toc">Talentos</h3>
+
+O quadro abaixo mostra um breve resumo dos `talentos` de `r stringr::str_to_title(personagem)`:
+
+```{r}
+db_talents <- read_csv(file = "../../../../talents.csv")
+
+db_talents %>%
+    dplyr::filter(name == personagem) %>%
+    dplyr::select(-c(name, cook, cook_attr, description)) -> db_talents_2
+    
+#db_talents_2 %>%
+#    kableExtra::kbl() %>%
+#    kableExtra::kable_styling(bootstrap_options = c("hover","striped","condensed")
+#    )
+```
+
+```{r}
+tags$div(class="container-fluid",
+  tags$div(class="row",
+    tags$div(class="col-md-4",
+      tags$div(class="row justify-content-center",
+        tags$small(style="text-align: center; margin-bottom: 0.5rem;", "Ataque Normal")),
+      tags$div(class="row justify-content-center",
+        tags$img(src=sprintf("/images/%s_1_talent.png", personagem), style="width: 50px;")),
+      tags$div(class="row justify-content-center",
+        tags$p(style="text-align: center;", db_talents_2$talent[1]))
+      ),
+    tags$div(class="col-md-4",
+      tags$div(class="row justify-content-center",
+        tags$small(style="text-align: center; margin-bottom: 0.5rem;", "Habilidade")),
+      tags$div(class="row justify-content-center",
+        tags$img(src=sprintf("/images/%s_2_talent.png", personagem), style="width: 50px;")),
+      tags$div(class="row justify-content-center",
+        tags$p(style="text-align: center;", db_talents_2$talent[2]))
+      ),
+    tags$div(class="col-md-4",
+      tags$div(class="row justify-content-center",
+        tags$small(style="text-align: center; margin-bottom: 0.5rem;", "Supremo")),
+      tags$div(class="row justify-content-center",
+        tags$img(src=sprintf("/images/%s_3_talent.png", personagem), style="width: 50px;")),
+      tags$div(class="row justify-content-center",
+        tags$p(style="text-align: center;", db_talents_2$talent[3]))
+      )
+  )
+) -> combate_html
+
+tags$div(class="container-fluid",
+  tags$div(class="row",
+      tags$div(class="col-md-6",
+      tags$div(class="row justify-content-center",
+        tags$small(style="text-align: center; margin-bottom: 0.5rem;", "Ascensão 1")),
+      tags$div(class="row justify-content-center",
+        tags$img(src=sprintf("/images/%s_4_talent.png", personagem), style="width: 50px;")),
+      tags$div(class="row justify-content-center",
+        tags$p(style="text-align: center;", db_talents_2$talent[4]))
+      ),
+    tags$div(class="col-md-6",
+      tags$div(class="row justify-content-center",
+        tags$small(style="text-align: center; margin-bottom: 0.5rem;", "Ascensão 4")),
+      tags$div(class="row justify-content-center",
+        tags$img(src=sprintf("/images/%s_5_talent.png", personagem), style="width: 50px;")),
+      tags$div(class="row justify-content-center",
+        tags$p(style="text-align: center;", db_talents_2$talent[5]))
+      )
+  )
+) -> passivo_html
+
+tags$div(class="container-fluid",
+  tags$div(class="row",
+    tags$div(class="col-md-12",
+      tags$div(class="row justify-content-center",
+        tags$small(style="text-align: center; margin-bottom: 0.5rem;", "Utilidade")),
+      tags$div(class="row justify-content-center",
+        tags$img(src=sprintf("/images/%s_6_talent.png", personagem), style="width: 50px;")),
+      tags$div(class="row justify-content-center",
+        tags$p(style="text-align: center;", db_talents_2$talent[6]))
+      )
+  )
+) -> utility_html
+
+tags$div(class="container",
+    tags$div(class="row",
+        tags$div(class="col-md-6 p-1",
+            tags$div(class="info_box info_box-primary", style="height: 91%;",
+                tags$div(class="info_box-heading",
+                    tags$h6(class="info_box-title genshin_font",
+                        style="text-align: center;",
+                        "Combate")),
+                tags$div(class="info_box-body", style="text-align:center",
+                    combate_html))),
+        tags$div(class="col-md-4 p-1",
+            tags$div(class="info_box info_box-primary", style="height: 91%;",
+                tags$div(class="info_box-heading",
+                    tags$h6(class="info_box-title genshin_font",
+                        style="text-align: center;",
+                        "Passivo")),
+                tags$div(class="info_box-body",
+                    passivo_html))),
+        tags$div(class="col-2 p-1",
+            tags$div(class="info_box info_box-primary", style="height: 91%;",
+                tags$div(class="info_box-heading",
+                    tags$h6(class="info_box-title genshin_font",
+                        style="text-align: center;",
+                        "Utilidade")),
+                tags$div(class="info_box-body",
+                    utility_html)))
     )
 )
 ```
 
-<a name="talentos"><h2 style="padding-top: 60px; margin-top: -60px;" class="genshin_font">Talentos</h2></a>
-
-
-<a name="constelacao"><h2 style="padding-top: 60px; margin-top: -60px;" class="genshin_font">Constelação</h2></a>
+<h5 id="constelacao" class="header_toc">Constelação</h3>
 
 
 
